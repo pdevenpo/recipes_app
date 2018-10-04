@@ -9,307 +9,320 @@
     android:weightSum="10"
     tools:context=".MainActivity">
 
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/landscape_fragment"/>
+
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/portrait_fragment"/>
+
+
     <!--
      This is the tutorial i'm using to create the main screen
      https://www.youtube.com/watch?v=VUPM387qyrw
      -->
 
-    <RelativeLayout
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+    <!--<RelativeLayout-->
+        <!--android:layout_weight="2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp">-->
 
-        <TextView
-            android:id="@+id/textGrid"
-            android:layout_width="wrap_content"
-            android:layout_height="73dp"
-            android:layout_centerInParent="true"
-            android:text="Welcome, User!"
-            android:textColor="@android:color/black"
-            android:textSize="34sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/textGrid"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="73dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:text="Welcome, User!"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="34sp" />-->
 
-    </RelativeLayout>
-    
-    <GridLayout
-        android:columnCount="2"
-        android:rowCount="3"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:layout_weight="8"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="14dp"
-        >
+    <!--</RelativeLayout>-->
+    <!---->
+    <!--<GridLayout-->
+        <!--android:columnCount="2"-->
+        <!--android:rowCount="3"-->
+        <!--android:alignmentMode="alignMargins"-->
+        <!--android:columnOrderPreserved="false"-->
+        <!--android:layout_weight="8"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:padding="14dp"-->
+        <!--&gt;-->
 
-    <!-- My Recipes -->
-    <android.support.v7.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="8dp"
-        >
+    <!--&lt;!&ndash; My Recipes &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_columnWeight="1"-->
+        <!--android:layout_rowWeight="1"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--app:cardElevation="8dp"-->
+        <!--app:cardCornerRadius="8dp"-->
+        <!--&gt;-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
-
-
-
-        <LinearLayout
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_margin="16dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/r1" />
-
-            <TextView
-                android:text="My Recipes"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            />
-        </LinearLayout>
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
 
 
 
-    </android.support.v7.widget.CardView>
+        <!--<LinearLayout-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
 
-    <!-- Find Store -->
-    <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
+            <!--<ImageView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:src="@drawable/r1" />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            <!--<TextView-->
+                <!--android:text="My Recipes"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <!--/>-->
+        <!--</LinearLayout>-->
 
-                <ImageView
-                    android:src="@drawable/r2"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
 
-                <TextView
-                    android:text="Find Store"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-            </LinearLayout>
+    <!--</android.support.v7.widget.CardView>-->
 
-        </android.support.v7.widget.CardView>
+    <!--&lt;!&ndash; Find Store &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:cardElevation="8dp"-->
+            <!--app:cardCornerRadius="8dp"-->
+            <!--&gt;-->
 
-    <!-- Timer -->
-    <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <!--<ImageView-->
+                    <!--android:src="@drawable/r2"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp" />-->
 
-                <ImageView
-                    android:src="@drawable/r3"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                <!--<TextView-->
+                    <!--android:text="Find Store"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
+            <!--</LinearLayout>-->
 
-                    android:layout_height="wrap_content"
-                    android:text="Timer"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+        <!--</android.support.v7.widget.CardView>-->
 
-            </LinearLayout>
+    <!--&lt;!&ndash; Timer &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:cardElevation="8dp"-->
+            <!--app:cardCornerRadius="8dp"-->
+            <!--&gt;-->
 
-        </android.support.v7.widget.CardView>
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
 
-    <!-- Today's Pick -->
-    <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+                <!--<ImageView-->
+                    <!--android:src="@drawable/r3"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp" />-->
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
 
-                <ImageView
-                    android:src="@drawable/r4"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Timer"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold" />-->
 
-                <TextView
-                    android:text="Today's Pick"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <!--</LinearLayout>-->
 
-            </LinearLayout>
+        <!--</android.support.v7.widget.CardView>-->
 
-        </android.support.v7.widget.CardView>
+    <!--&lt;!&ndash; Today's Pick &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:cardElevation="8dp"-->
+            <!--app:cardCornerRadius="8dp"-->
+            <!--&gt;-->
 
-    <!-- My Account -->
-    <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <!--<ImageView-->
+                    <!--android:src="@drawable/r4"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp" />-->
 
-                <ImageView
-                    android:src="@drawable/r5"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                <!--<TextView-->
+                    <!--android:text="Today's Pick"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
-                <TextView
-                    android:text="My Account"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <!--</LinearLayout>-->
 
-            </LinearLayout>
+        <!--</android.support.v7.widget.CardView>-->
 
-        </android.support.v7.widget.CardView>
+    <!--&lt;!&ndash; My Account &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:cardElevation="8dp"-->
+            <!--app:cardCornerRadius="8dp"-->
+            <!--&gt;-->
 
-    <!-- Favorites -->
-    <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            >
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <!--<ImageView-->
+                    <!--android:src="@drawable/r5"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp" />-->
 
-                <ImageView
-                    android:src="@drawable/r6"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                <!--<TextView-->
+                    <!--android:text="My Account"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
-                <TextView
-                    android:text="Favorites"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <!--</LinearLayout>-->
 
-            </LinearLayout>
+        <!--</android.support.v7.widget.CardView>-->
 
-        </android.support.v7.widget.CardView>
-    </GridLayout>
+    <!--&lt;!&ndash; Favorites &ndash;&gt;-->
+    <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_columnWeight="1"-->
+            <!--android:layout_rowWeight="1"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--app:cardElevation="8dp"-->
+            <!--app:cardCornerRadius="8dp"-->
+            <!--&gt;-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="?android:attr/selectableItemBackground" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                    <!--android:src="@drawable/r6"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp" />-->
+
+                <!--<TextView-->
+                    <!--android:text="Favorites"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+            <!--</LinearLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+    <!--</GridLayout>-->
 
 </LinearLayout>
