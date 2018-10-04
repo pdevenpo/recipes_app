@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.todayspick
+package edu.osu.recipe_app.ui.Timer
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.osu.recipe_app.R
+import edu.osu.recipe_app.ui.TodaysPick.TodaysPickViewModel
 
-class TodaysPickFragment : Fragment() {
+class TimerFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TodaysPickFragment()
+        fun newInstance() = TimerFragment()
     }
 
     private lateinit var viewModel: TodaysPickViewModel
