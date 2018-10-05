@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".TodaysPickActivity"></activity>
+        <activity android:name=".MyRecipesActivity"></activity>
+        <activity android:name=".FavoritesActivity"></activity>
+        <activity android:name=".TimerActivity"></activity>
+        <activity android:name=".FindStoreActivity"></activity>
+        <activity android:name=".MyAccountActivity"></activity>
     </application>
 
 </manifest>
