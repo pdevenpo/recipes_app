@@ -55,9 +55,11 @@
         >
 
         <Button
+            android:id="@+id/MyRecipesButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick_Button"/>
 
 
 
@@ -104,9 +106,11 @@
             >
 
         <Button
+            android:id="@+id/FindStoreButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick_Button"/>
 
             <LinearLayout
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -148,9 +152,11 @@
             >
 
         <Button
+            android:id="@+id/TimerButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick_Button"/>
 
             <LinearLayout
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -193,11 +199,11 @@
             >
 
         <Button
+            android:id="@+id/TodaysPickButton"
             android:layout_width="match_parent"
-            android:id="@+id/pick_btn"
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:onClick="onClickListenerPick"/>
+            android:onClick="onClick_Button"/>
 
             <LinearLayout
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -239,9 +245,11 @@
             >
 
         <Button
+            android:id="@+id/MyAccountButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick_Button"/>
 
             <LinearLayout
                 android:layout_gravity="center_horizontal|center_vertical"
@@ -283,9 +291,11 @@
             >
 
         <Button
+            android:id="@+id/FavoritesButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick_Button"/>
 
             <LinearLayout
                 android:layout_gravity="center_horizontal|center_vertical"

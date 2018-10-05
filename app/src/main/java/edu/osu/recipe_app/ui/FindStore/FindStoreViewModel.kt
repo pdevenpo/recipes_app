@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.TodaysPick
+package edu.osu.recipe_app.ui.FindStore
 
 import android.arch.lifecycle.ViewModel
 

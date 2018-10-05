@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.osu.recipe_app.R
-import edu.osu.recipe_app.ui.TodaysPick.FindStoreViewModel
 
 class FindStoreFragment : Fragment() {
 
