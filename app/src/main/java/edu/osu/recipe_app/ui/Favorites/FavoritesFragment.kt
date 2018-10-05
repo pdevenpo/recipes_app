@@ -11,7 +11,7 @@ import edu.osu.recipe_app.R
 
 class FavoritesFragment : Fragment() {
 
-    private val s = "FavoritesFragment"
+    private val s = "Favorites"
 
     companion object {
         fun newInstance() = FavoritesFragment()
