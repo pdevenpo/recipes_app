@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.osu.recipe_app">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <supports-screens
         android:largeScreens="true"
@@ -25,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TodaysPickActivity"></activity>
-        <activity android:name=".MyRecipesActivity"></activity>
+        <activity android:name=".MyRecipeActivity"></activity>
         <activity android:name=".FavoritesActivity"></activity>
         <activity android:name=".TimerActivity"></activity>
         <activity android:name=".FindStoreActivity"></activity>
