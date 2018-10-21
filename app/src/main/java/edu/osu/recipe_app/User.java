@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class User {
     @PrimaryKey
+    @android.support.annotation.NonNull
     private String email;
 
     @ColumnInfo(name = "password")
