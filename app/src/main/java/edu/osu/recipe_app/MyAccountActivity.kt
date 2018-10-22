@@ -8,12 +8,12 @@ class MyAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.my_recipes_activity)
+
+        setContentView(R.layout.my_account_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, MyAccountFragment.newInstance())
                     .commitNow()
         }
     }
-
 }
