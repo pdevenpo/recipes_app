@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Recipe_app</string>
+    <string name="login_error">Error: Username or Password Incorrect</string>
+    <string name="account_error">Error: Account under email already exists</string>
 </resources>
