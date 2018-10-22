@@ -1,11 +1,13 @@
 package edu.osu.recipe_app
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,9 +16,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
         Log.d(s, "Activity Created")
 
+        val fragmentManager = getFragmentManager()
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        val configInfo = getResources().getConfiguration()
+        if (configInfo.orientation === Configuration.ORIENTATION_LANDSCAPE) {
+            val fragmentLandscape = FragmentLandscape()
+            fragmentTransaction.replace(android.R.id.content, fragmentLandscape)
+        } else {
+            val fragmentPortrait = FragmentPortrait()
+            fragmentTransaction.replace(android.R.id.content, fragmentPortrait)
+        }
+
+        fragmentTransaction.commit()
     }
 
     fun onClick_Button(v: View) {
