@@ -9,15 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AccountFragment extends Fragment {
 
     private EditText mEmail;
     private EditText mPassword;
     private EditText mName;
-    private LoginInfo mLoginInfo;
+    private User mUser;
     private Button mLoginButton;
     private Button mNewAccountButton;
+    private UserRepository mUserRepository;
 
     public AccountFragment() {
     }
@@ -25,7 +27,8 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mLoginInfo = new LoginInfo();
+        mUser = new User();
+        mUserRepository = new UserRepository(this.getContext());
     }
 
     @Override
@@ -36,9 +39,8 @@ public class AccountFragment extends Fragment {
         mEmail = v.findViewById(R.id.emailEntry);
         mPassword = v.findViewById(R.id.passwordEntry);
         mName = v.findViewById(R.id.nameEntry);
-        mLoginButton = v.findViewById(R.id.loginButton);
-        mNewAccountButton = v.findViewById(R.id.newAccountButton);
-
+        mLoginButton = (Button) v.findViewById(R.id.loginButton);
+        mNewAccountButton = (Button) v.findViewById(R.id.newAccountButton);
 
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -47,7 +49,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mLoginInfo.setEmail(charSequence.toString());
+                mUser.setEmail(charSequence.toString());
             }
 
             @Override
@@ -62,7 +64,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mLoginInfo.setPassword(charSequence.toString());
+                mUser.setPassword(charSequence.toString());
             }
 
             @Override
@@ -77,7 +79,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mLoginInfo.setName(charSequence.toString());
+                mUser.setName(charSequence.toString());
             }
 
             @Override
@@ -88,7 +90,13 @@ public class AccountFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                if(mUser.getEmail() != null && mUser.getPassword() != null && mUser.getName() != null){
+                    Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
 
+                    mUserRepository.insertUser(mEmail.getText().toString(), mPassword.getText().toString(), mName.getText().toString());
+                } else {
+                    Toast.makeText(getContext(), "All fields must not be blank", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

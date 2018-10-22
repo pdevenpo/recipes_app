@@ -33,6 +33,7 @@
         <activity android:name=".TimerActivity"></activity>
         <activity android:name=".FindStoreActivity"></activity>
         <activity android:name=".MyAccountActivity"></activity>
+        <activity android:name=".AccountActivity"></activity>
     </application>
 
 </manifest>
