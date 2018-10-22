@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.MyAccountButton -> {
-                val myAccountIntent = Intent(this, MyAccountActivity::class.java)
+                val myAccountIntent = Intent(this, AccountActivity::class.java)
                 startActivity(myAccountIntent)
             }
 

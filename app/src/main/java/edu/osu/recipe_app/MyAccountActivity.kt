@@ -9,14 +9,6 @@ class MyAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val userRepo = UserRepository(applicationContext)
-
-        val email = "test1@gmail.com"
-        val name = "steve"
-        val password = "password"
-
-        userRepo.insertUser(email, password, name)
-
         setContentView(R.layout.my_account_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
