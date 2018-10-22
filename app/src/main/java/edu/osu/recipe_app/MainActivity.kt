@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         when (v.id) {
 
             R.id.MyRecipesButton -> {
-                val myRecipesIntent = Intent(this, MyRecipesActivity::class.java)
+                val myRecipesIntent = Intent(this, MyRecipeActivity::class.java)
                 startActivity(myRecipesIntent)
             }
 
