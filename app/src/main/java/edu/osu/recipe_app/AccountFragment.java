@@ -90,8 +90,13 @@ public class AccountFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
-                mUserRepository.insertUser(mEmail.getText().toString(), mPassword.getText().toString(), mName.getText().toString());
+                if(mUser.getEmail() != null && mUser.getPassword() != null && mUser.getName() != null){
+                    Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
+
+                    mUserRepository.insertUser(mEmail.getText().toString(), mPassword.getText().toString(), mName.getText().toString());
+                } else {
+                    Toast.makeText(getContext(), "All fields must not be blank", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
