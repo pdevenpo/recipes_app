@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.os.AsyncTask;
@@ -28,6 +29,8 @@ public class MyRecipeActivity extends Activity{
     ProgressDialog mProgressDialog;
     String[] recipeNameArr = new String[10];
     String[] prepTimeArr = new String[10];
+    String[] directionsArr = new String[10];
+    String[] ingredientsArr = new String[10];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class MyRecipeActivity extends Activity{
         String title;
         String time;
         String rating = "0";
+        String direction;
+        String ingredient;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -91,6 +96,22 @@ public class MyRecipeActivity extends Activity{
                     Elements ratings = document.select("meta[property=og:rating]");
                     rating = ratings.attr("content").toString();
                     prepTimeArr[j] = rating;
+
+                    direction = parsedHtml.select("div.directions--section").text();
+//                    Elements directions = document.select("div.directions--section");
+//                    direction = directions.attr("content");
+                    directionsArr[j] = direction.substring(0,direction.indexOf("You"));
+
+                    //grab the ingredients
+                    Elements div = document.select("div.recipe-container-outer");
+                    Elements ul = div.select("ul");
+                    Elements li = ul.select("li.checkList__line");
+
+                    ingredient = li.text();
+                    ingredient = ingredient.substring(0,(ingredient.length() - 57));
+                    ingredientsArr[j] = ingredient;
+
+
                     j++;
                 }
             } catch (IOException e) {
@@ -103,9 +124,9 @@ public class MyRecipeActivity extends Activity{
         protected void onPostExecute(Void result) {
             // Set title into TextView
             TextView txttitle = (TextView) findViewById(R.id.titletxt);
-            txttitle.setText(recipeNameArr[0] + "," + prepTimeArr[0] + "\n" + recipeNameArr[1] + "," + prepTimeArr[1] + "\n" + recipeNameArr[2] + "," + prepTimeArr[2] + "\n" + recipeNameArr[3] + "," + prepTimeArr[3]);
-//            TextView txtingredient = (TextView) findViewById(R.id.ingredienttxt);
-//            txtingredient.setText(prepTimeArr[0] + "PrepTime!!");
+            txttitle.setText("RECIPE NAME: " + recipeNameArr[0] + ", " + "\n" + "INGREDIENTS: " +   ingredientsArr[0] + "\n" + "RATING: " + prepTimeArr[0] + "\n" + "DIRECTIONS: " + directionsArr[0] +"\n");
+            TextView txtingredient = (TextView) findViewById(R.id.ingredienttxt);
+            txtingredient.setText("RECIPE NAME: " + recipeNameArr[1] + ", " + "\n" + "INGREDIENTS: " +   ingredientsArr[1] + "\n" + "RATING: " + prepTimeArr[1] + "\n" + "DIRECTIONS: " + directionsArr[1] +"\n");
             mProgressDialog.dismiss();
         }
     }

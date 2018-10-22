@@ -4,27 +4,31 @@
     android:layout_height="match_parent" >
 
 
-    <TextView
-        android:id="@+id/titletxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:isScrollContainer="true">
 
-    <TextView
-        android:id="@+id/ingredienttxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
+        <TextView
+            android:id="@+id/titletxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/titlebutton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titletxt"
-        android:text="@string/app_name"></Button>
+        <TextView
+            android:id="@+id/ingredienttxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
 
-
-
+        <Button
+            android:id="@+id/titlebutton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titletxt"
+            android:text="@string/app_name"></Button>
+    </LinearLayout>
 
 
 </RelativeLayout>
