@@ -1,4 +1,4 @@
-package edu.osu.recipe_app;
+package edu.osu.recipe_app.ui.UserData;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;

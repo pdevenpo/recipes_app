@@ -1,8 +1,8 @@
-package edu.osu.recipe_app
+package edu.osu.recipe_app.ui.Timer
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import edu.osu.recipe_app.ui.Timer.TimerFragment
+import edu.osu.recipe_app.R
 
 class TimerActivity : AppCompatActivity() {
 

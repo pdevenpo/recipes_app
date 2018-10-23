@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgfragment"
-    tools:context=".ui.MyAccount.MyAccountFragment">
+    tools:context=".ui.MyAccount.AccountNewFragment">
 
     <!--My Account Text-->
     <TextView
@@ -98,8 +98,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.708" />
 
-    <!--Login button -->
-
     <!--New Account Button -->
     <Button
         android:id="@+id/newAccountButton"
@@ -116,24 +114,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.813" />
-
-    <!--Error Message -->
-    <TextView
-        android:id="@+id/errorMessage"
-        android:layout_width="372dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
-
-
 
 
 

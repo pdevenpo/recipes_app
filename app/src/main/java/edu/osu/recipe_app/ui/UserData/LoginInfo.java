@@ -1,4 +1,4 @@
-package edu.osu.recipe_app;
+package edu.osu.recipe_app.ui.UserData;
 
 public class LoginInfo {
 
