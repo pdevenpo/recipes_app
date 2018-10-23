@@ -1,10 +1,11 @@
-package edu.osu.recipe_app
+package edu.osu.recipe_app.ui.Favorites
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import edu.osu.recipe_app.ui.Favorites.FavoritesFragment
+import edu.osu.recipe_app.R
+import edu.osu.recipe_app.ui.UserData.UserRepository
 
 class FavoritesActivity : AppCompatActivity() {
 

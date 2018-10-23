@@ -1,4 +1,4 @@
-package edu.osu.recipe_app;
+package edu.osu.recipe_app.ui.MyRecipes;
 
 import java.io.IOException;
 import org.jsoup.Jsoup;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import edu.osu.recipe_app.R;
 
 public class MyRecipeActivity extends Activity{
 
