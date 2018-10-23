@@ -1,4 +1,4 @@
-package edu.osu.recipe_app;
+package edu.osu.recipe_app.ui.UserData;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
+
+import edu.osu.recipe_app.AppDatabase;
 
 public class UserRepository {
     private AppDatabase db;
