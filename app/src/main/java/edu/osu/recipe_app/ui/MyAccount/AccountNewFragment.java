@@ -24,6 +24,7 @@ public class AccountNewFragment extends Fragment {
     private EditText mName;
     private User mUser;
     private Button mNewAccountButton;
+    private Button mDeleteUserButton;
     private UserRepository mUserRepository;
 
     public AccountNewFragment() {
@@ -45,6 +46,7 @@ public class AccountNewFragment extends Fragment {
         mPassword = v.findViewById(R.id.passwordEntry);
         mName = v.findViewById(R.id.nameEntry);
         mNewAccountButton = (Button) v.findViewById(R.id.newAccountButton);
+        mDeleteUserButton = (Button) v.findViewById(R.id.deleteUserButton);
 
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,26 +93,45 @@ public class AccountNewFragment extends Fragment {
             }
         });
 
-
-
         mNewAccountButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
                 if(mUser.getEmail() != null && mUser.getPassword() != null && mUser.getName() != null){
-                    Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
+                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null) {
+                        Toast.makeText(getContext(), "Error: User already exists with that email", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
 
-                    mUserRepository.insertUser(mEmail.getText().toString(), mPassword.getText().toString(), mName.getText().toString());
+                        mUserRepository.insertUser(mEmail.getText().toString(), mPassword.getText().toString(), mName.getText().toString());
 
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.putExtra("CurrentUser", mUser.getName());
-                    startActivity(intent);
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra("CurrentUser", mUser.getName());
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(getContext(), "All fields must not be blank", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        mDeleteUserButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(mUser.getEmail() != null){
+                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){
+                        mUserRepository.deleteUser(mUser.getEmail());
+                        Toast.makeText(getContext(), "User deleted", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(), "No user found with that email", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Please enter an email first", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return v;
     }

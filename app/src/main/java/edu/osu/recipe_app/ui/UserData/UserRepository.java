@@ -13,7 +13,7 @@ public class UserRepository {
     private AppDatabase db;
 
     public UserRepository(Context context){
-        db = Room.databaseBuilder(context, AppDatabase.class, "app-database-checkpoint4").allowMainThreadQueries().build();
+        db = Room.databaseBuilder(context, AppDatabase.class, "AppDatabaseCheckpoint4").allowMainThreadQueries().build();
     }
 
     public void insertUser(String email, String password, String name){
@@ -47,14 +47,18 @@ public class UserRepository {
         return db.userDao().getAll();
     }
 
-    public void deleteUser(final User user){
+    public void deleteUser(final String email){
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                db.userDao().delete(user);
+                db.userDao().delete(db.userDao().findByEmail(email));
                 return null;
             }
         }.execute();
+    }
+
+    public User findUserByEmail(final String email){
+        return db.userDao().findByEmail(email);
     }
 
     public void updateUser(final User user){
