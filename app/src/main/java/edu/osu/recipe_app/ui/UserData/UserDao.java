@@ -17,6 +17,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE name LIKE :name LIMIT 1")
     User findByName(String name);
 
+    @Query("SELECT * FROM user WHERE email LIKE :email LIMIT 1")
+    User findByEmail(String email);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);
 
