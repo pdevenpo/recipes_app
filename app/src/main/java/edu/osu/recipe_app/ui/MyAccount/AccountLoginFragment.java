@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class AccountLoginFragment extends Fragment {
     private Button mLoginButton;
     private Button mCreateAccountButton;
     private Button mListUsersButton;
+    private Button mEditAccountButton;
 
     private UserRepository mUserRepository;
 
@@ -51,6 +53,7 @@ public class AccountLoginFragment extends Fragment {
         mLoginButton = (Button) v.findViewById(R.id.loginButton);
         mCreateAccountButton = (Button) v.findViewById(R.id.createAccountButton);
         mListUsersButton = (Button) v.findViewById(R.id.listUsersButton);
+        mEditAccountButton = v.findViewById(R.id.EditAccount);
 
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,6 +90,28 @@ public class AccountLoginFragment extends Fragment {
             @Override
             public void onClick(View v){
             startActivity(new Intent(getActivity(), AccountNewActivity.class));
+            }
+        });
+
+        mEditAccountButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                if(mEmail != null){
+//                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){
+//                        Intent intent = new Intent(getActivity(), AccountEditActivity.class);
+//                        intent.putExtra("CurrentUserEmail", mUser.getName());
+//                        startActivity(intent);
+//                    } else {
+//                        Toast.makeText(getContext(), "Must enter and email associated with an account", Toast.LENGTH_SHORT).show();
+//
+//                    }
+
+                } else {
+                    Toast.makeText(getContext(), "Email must not be blank", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
