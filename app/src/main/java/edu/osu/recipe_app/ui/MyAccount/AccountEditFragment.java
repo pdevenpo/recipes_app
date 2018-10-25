@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import edu.osu.recipe_app.MainActivity;
 import edu.osu.recipe_app.R;
@@ -64,6 +61,7 @@ public class AccountEditFragment extends Fragment {
         String email = getArguments().getString("CurrentUserEmail");
         if(email != null){
             mDefaultEmail = email;
+            mUser.setEmail(mDefaultEmail);
         }
         mUserEmail.setText(mDefaultEmail);
 
@@ -101,15 +99,21 @@ public class AccountEditFragment extends Fragment {
         mUpdateAccountButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getContext(), "Account Updated", Toast.LENGTH_SHORT).show();
 
-                //&&*
-                //update user account
-                //use mNewPassword and mNewName
+                if(mNewName != null && mNewPassword != null){
+                    Toast.makeText(getContext(), "Account Updated", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("CurrentUser", mUser.getName());
-                startActivity(intent);
+                    mUser.setName(mNewName);
+                    mUser.setPassword(mNewPassword);
+
+                    mUserRepository.updateUser(mUser);
+
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("CurrentUser", mUser.getName());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Fields must not be blank", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
