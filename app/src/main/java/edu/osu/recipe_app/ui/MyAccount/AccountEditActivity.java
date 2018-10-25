@@ -7,21 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 
 import edu.osu.recipe_app.R;
 
-public class AccountNewActivity extends AppCompatActivity {
-
+public class AccountEditActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_account_new_activity);
+        setContentView(R.layout.my_account_edit_activity);
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.AccountContainer);
+        Fragment fragment = fm.findFragmentById(R.id.AccountEditContainer);
 
         if(fragment == null){
-            fragment = new AccountNewFragment();
+            fragment = new AccountEditFragment();
             fm.beginTransaction()
-                    .add(R.id.AccountContainer, fragment)
+                    .add(R.id.AccountEditContainer, fragment)
                     .commit();
-        //changes to test
         }
     }
 }

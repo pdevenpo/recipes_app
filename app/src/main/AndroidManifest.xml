@@ -34,6 +34,7 @@
         <activity android:name=".ui.FindStore.FindStoreActivity"></activity>
         <activity android:name=".ui.MyAccount.AccountNewActivity"></activity>
         <activity android:name=".ui.MyAccount.AccountLoginActivity"></activity>
+        <activity android:name=".ui.MyAccount.AccountEditActivity"></activity>
 
     </application>
 

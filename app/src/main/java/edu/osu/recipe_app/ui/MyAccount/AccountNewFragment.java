@@ -40,7 +40,7 @@ public class AccountNewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.my_account_fragment, parent, false);
+        View v = inflater.inflate(R.layout.my_account_new_fragment, parent, false);
 
         mEmail = v.findViewById(R.id.emailEntry);
         mPassword = v.findViewById(R.id.passwordEntry);
