@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import edu.osu.recipe_app.MainActivity;
 import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.UserData.User;
 import edu.osu.recipe_app.ui.UserData.UserRepository;
@@ -119,17 +120,19 @@ public class AccountLoginFragment extends Fragment {
             @Override
             public void onClick(View v){
 
-//                if(mUser.getEmail() != null && mUser.getPassword() != null){
-//                    //Toast.makeText(getContext(), "User added", Toast.LENGTH_SHORT).show();
-//                    //Log in user if they currently exist in the database
-//
-//                    //go back to the main screen
-//                    Intent intent = new Intent(getActivity(), MainActivity.class);
-//                    intent.putExtra("CurrentUser", mUser.getName());
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(getContext(), "All fields must not be blank", Toast.LENGTH_SHORT).show();
-//                }
+                if(mUser.getEmail() != null && mUser.getPassword() != null){
+                    User retrievedUser = mUserRepository.findUserByEmail(mUser.getEmail());
+                    if(retrievedUser != null && retrievedUser.getPassword().equals(mUser.getPassword())){
+                        //go back to the main screen
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra("CurrentUser", retrievedUser.getName());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(), "No user found with that email and password", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "All fields must not be blank", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
