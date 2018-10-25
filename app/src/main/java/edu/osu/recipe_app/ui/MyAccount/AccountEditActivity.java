@@ -15,8 +15,19 @@ public class AccountEditActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.AccountEditContainer);
 
+        String mCurrentUserEmail = "Account";
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            mCurrentUserEmail = extras.getString("CurrentUserEmail");
+        }
+
+
         if(fragment == null){
             fragment = new AccountEditFragment();
+            Bundle args = new Bundle();
+            args.putString("CurrentUserEmail", mCurrentUserEmail);
+            fragment.setArguments(args);
             fm.beginTransaction()
                     .add(R.id.AccountEditContainer, fragment)
                     .commit();
