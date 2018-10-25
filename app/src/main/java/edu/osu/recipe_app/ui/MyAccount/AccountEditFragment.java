@@ -55,10 +55,11 @@ public class AccountEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.my_account_login_fragment, parent, false);
+        View v = inflater.inflate(R.layout.my_account_edit_fragment, parent, false);
         mName = v.findViewById(R.id.nameUpdate);
         mPassword = v.findViewById(R.id.passwordUpdate);
         mUserEmail = v.findViewById(R.id.emailEdit);
+        mUpdateAccountButton = v.findViewById(R.id.updateAccount);
 
         String email = getArguments().getString("CurrentUserEmail");
         if(email != null){

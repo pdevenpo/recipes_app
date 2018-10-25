@@ -97,19 +97,19 @@ public class AccountLoginFragment extends Fragment {
             @Override
             public void onClick(View v){
 
-                if(mEmail != null){
-//                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){
-//                        Intent intent = new Intent(getActivity(), AccountEditActivity.class);
-//                        intent.putExtra("CurrentUserEmail", mUser.getName());
-//                        startActivity(intent);
-//                    } else {
-//                        Toast.makeText(getContext(), "Must enter and email associated with an account", Toast.LENGTH_SHORT).show();
-//
-//                    }
+                if(!mEmail.getText().toString().equals("")){
+                    startActivity(new Intent(getActivity(), AccountEditActivity.class));
+                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){ //this doesn't seem to be working
+                        Intent intent = new Intent(getActivity(), AccountEditActivity.class);
+                        intent.putExtra("CurrentUserEmail", mEmail.toString());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(), "Must enter an email associated with an account", Toast.LENGTH_SHORT).show();
+
+                    }
 
                 } else {
                     Toast.makeText(getContext(), "Email must not be blank", Toast.LENGTH_SHORT).show();
-
                 }
 
             }
