@@ -13,6 +13,7 @@ import android.widget.TextView;
 import edu.osu.recipe_app.R;
 
 public class TimerFragment extends Fragment {
+    private String mTimerLength;
     private TextView mCountdownText;
     private Button mCountdownButton;
     private ProgressBar mProgressBar;
@@ -20,7 +21,7 @@ public class TimerFragment extends Fragment {
     private CountDownTimer mCountDownTimer;
     private CountDownTimer mProgressBarTimer;
 
-    private float timeLeftInMilliseconds = 60000; // 10 minutes, hardcoded for now
+    private float timeLeftInMilliseconds = 60100; // 10 minutes, hardcoded for now
     private float startingTimeInMilliseconds;
 
     private boolean timerRunning;
@@ -53,6 +54,11 @@ public class TimerFragment extends Fragment {
                 ToggleTimer();
             }
         });
+
+        Bundle extras = getActivity().getIntent().getExtras();
+        if(extras != null){
+            mTimerLength =  extras.getString("TimerLength");
+        }
 
         return v;
     }
@@ -109,12 +115,23 @@ public class TimerFragment extends Fragment {
     }
 
     public void UpdateTimer(){
-        int minutes = (int) timeLeftInMilliseconds / 60000;
+        int hours = (int) timeLeftInMilliseconds / 3600000;
+        int minutes = (int) timeLeftInMilliseconds % 3600000 / 60000;
         int seconds = (int) timeLeftInMilliseconds % 60000 / 1000;
 
-        String timeLeftText;
+        String timeLeftText = "";
 
-        timeLeftText = Integer.toString(minutes) + ":";
+        if(hours < 10){
+            timeLeftText += "0";
+        }
+
+        timeLeftText += hours + ":";
+
+        if(minutes < 10){
+            timeLeftText += "0";
+        }
+        timeLeftText += minutes + ":";
+
         if(seconds < 10){
             timeLeftText += "0";
         }

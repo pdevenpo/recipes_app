@@ -19,6 +19,7 @@ public class TimerActivity extends AppCompatActivity {
 
         if(fragment == null){
             fragment = new TimerFragment();
+
             fm.beginTransaction()
                     .add(R.id.TimerContainer, fragment)
                     .commit();
