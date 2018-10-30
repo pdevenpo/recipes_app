@@ -43,14 +43,71 @@
 
     <Button
         android:id="@+id/StartTimerButton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:width="200dp"
-        android:height="50dp"
-        android:text="Start Timer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:padding="5dp"
+        android:text="Start"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/HorizontalDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TimerProgressBar" />
+
+    <View
+        android:id="@+id/HorizontalDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/TimerButtonBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/TimerButtonBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/PauseTimerButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:background="#00000000"
+            android:padding="5dp"
+            android:text="Pause" />
+
+        <View
+            android:id="@+id/VerticalDivider"
+            android:layout_width="2dp"
+            android:layout_height="50dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/CancelTimerButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="26dp"
+            android:background="#00000000"
+            android:padding="5dp"
+            android:text="Cancel"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

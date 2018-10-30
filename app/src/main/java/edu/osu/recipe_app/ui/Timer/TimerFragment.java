@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,7 +16,11 @@ import edu.osu.recipe_app.R;
 public class TimerFragment extends Fragment {
     private String mTimerLength;
     private TextView mCountdownText;
-    private Button mCountdownButton;
+    private Button mStartPauseTimerButton;
+    private Button mPauseTimerButton;
+    private Button mCancelTimerButton;
+    private LinearLayout bottomTimerButtonBar;
+
     private ProgressBar mProgressBar;
 
     private CountDownTimer mCountDownTimer;
@@ -42,16 +47,36 @@ public class TimerFragment extends Fragment {
         startingTimeInMilliseconds = timeLeftInMilliseconds;
 
         mCountdownText = (TextView) v.findViewById(R.id.CountdownText);
-        mCountdownButton = (Button) v.findViewById(R.id.StartTimerButton);
+        mStartPauseTimerButton = (Button) v.findViewById(R.id.StartTimerButton);
+        mPauseTimerButton = (Button) v.findViewById(R.id.PauseTimerButton);
+        mCancelTimerButton = (Button) v.findViewById(R.id.CancelTimerButton);
+
+        bottomTimerButtonBar = (LinearLayout) v.findViewById(R.id.TimerButtonBar);
+        bottomTimerButtonBar.setVisibility(View.INVISIBLE);
+
         mProgressBar = (ProgressBar) v.findViewById(R.id.TimerProgressBar);
 
         mProgressBar.setMax((int) startingTimeInMilliseconds);
         mProgressBar.setProgress((int) startingTimeInMilliseconds);
 
-        mCountdownButton.setOnClickListener(new View.OnClickListener(){
+        mStartPauseTimerButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                StartTimer();
+            }
+        });
+
+        mPauseTimerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 ToggleTimer();
+            }
+        });
+
+        mCancelTimerButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                CancelTimer();
             }
         });
 
@@ -65,15 +90,32 @@ public class TimerFragment extends Fragment {
 
     public void ToggleTimer(){
         if(timerRunning){
-            StopTimer();
+            mPauseTimerButton.setText("Resume");
+            PauseTimer();
         } else {
+            mPauseTimerButton.setText("Pause");
             StartTimer();
         }
     }
 
-    public void StopTimer(){
+    public void CancelTimer(){
+        mCancelTimerButton.setVisibility(View.INVISIBLE);
+        bottomTimerButtonBar.setVisibility(View.INVISIBLE);
+        mStartPauseTimerButton.setVisibility(View.VISIBLE);
+
+        mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
-        mCountdownButton.setText("Start");
+
+        timerRunning = false;
+
+        timeLeftInMilliseconds = startingTimeInMilliseconds;
+
+        UpdateTimer();
+        UpdateProgressBar();
+    }
+
+    public void PauseTimer(){
+        mCancelTimerButton.setVisibility(View.VISIBLE);
 
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
@@ -82,14 +124,17 @@ public class TimerFragment extends Fragment {
     }
 
     public void StartTimer(){
+        bottomTimerButtonBar.setVisibility(View.VISIBLE);
+        mStartPauseTimerButton.setVisibility(View.INVISIBLE);
+        mCancelTimerButton.setVisibility(View.INVISIBLE);
+
+        // Countdown timer for smooth progress bar visuals
         mProgressBarTimer = new CountDownTimer((long) timeLeftInMilliseconds, 1) {
             @Override
             public void onTick(long l) {
                 timeLeftInMilliseconds = l;
-
                 // Update Timer Progress bar visually
-                int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
-                mProgressBar.setProgress((int) timeLeftInMilliseconds);
+                UpdateProgressBar();
             }
 
             @Override
@@ -98,6 +143,7 @@ public class TimerFragment extends Fragment {
             }
         }.start();
 
+        // Countdown timer for text on screen
         mCountDownTimer = new CountDownTimer((long) timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -110,8 +156,12 @@ public class TimerFragment extends Fragment {
 
             }
         }.start();
-        mCountdownButton.setText("Pause");
         timerRunning = true;
+    }
+
+    private void UpdateProgressBar(){
+        int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
+        mProgressBar.setProgress((int) timeLeftInMilliseconds);
     }
 
     public void UpdateTimer(){
