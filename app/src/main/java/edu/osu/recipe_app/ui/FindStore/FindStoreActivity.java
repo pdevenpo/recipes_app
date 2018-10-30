@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import edu.osu.recipe_app.R;
@@ -51,12 +52,27 @@ public class FindStoreActivity extends AppCompatActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+    }
+
+    public void findRestaurants(View v){
+
+            StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch?json?");
+            stringBuilder.append("&radius="+1000);
+            stringBuilder.append("&keyword="+"restaurant");
+            stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
+
+            String url = stringBuilder.toString();
+
+            Object dataTransfer[] = new Object[2];
+            dataTransfer[0] = mMap;
+            dataTransfer[1] = url;
+
+            GetNearbyPlace getNearbyPlace = new GetNearbyPlace();
+            getNearbyPlace.execute(dataTransfer);
 
 
 
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
