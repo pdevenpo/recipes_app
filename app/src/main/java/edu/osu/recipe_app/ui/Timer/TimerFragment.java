@@ -15,7 +15,9 @@ import android.widget.TextView;
 import edu.osu.recipe_app.R;
 
 public class TimerFragment extends Fragment {
+    // Potentially use this when passing an extra from another Activity?
     private String mTimerLength;
+
     private TextView mCountdownText;
     private Button mStartPauseTimerButton;
     private Button mPauseTimerButton;
@@ -26,15 +28,15 @@ public class TimerFragment extends Fragment {
 
     private ProgressBar mProgressBar;
 
-    private CountDownTimer mCountDownTimer;
-    private CountDownTimer mProgressBarTimer;
+    private CountDownTimer mCountDownTimer;        // Countdown timer to handle # of milliseconds left
+    private CountDownTimer mProgressBarTimer;      // Countdown timer to handle Visual Progress Bar
 
-    private NumberPicker hourNumberPicker;
-    private NumberPicker minuteNumberPicker;
-    private NumberPicker secondNumberPicker;
+    private NumberPicker hourNumberPicker;         // Number Picker for user to select # of Hours
+    private NumberPicker minuteNumberPicker;       // Number Picker for user to select # of Minutes
+    private NumberPicker secondNumberPicker;       // Number Picker for user to select # of seconds
 
-    private float timeLeftInMilliseconds; // 10 minutes, hardcoded for now
-    private float startingTimeInMilliseconds;
+    private float timeLeftInMilliseconds;          // Time currently left on timer, in milliseconds
+    private float startingTimeInMilliseconds;      // Starting time, in milliseconds
 
     private boolean timerRunning;
 
@@ -51,8 +53,15 @@ public class TimerFragment extends Fragment {
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.timer_fragment, parent, false);
 
+        // Potentially use this when passing an extra from another Activity?
+        Bundle extras = getActivity().getIntent().getExtras();
+        if(extras != null){
+            mTimerLength =  extras.getString("TimerLength");
+        }
+
         numberPickerLayout = (LinearLayout) v.findViewById(R.id.NumberPickerLayout);
 
+        // Handle User Input via NumberPickers
         hourNumberPicker = (NumberPicker) v.findViewById(R.id.HourNumberPicker);
         hourNumberPicker.setMaxValue(99);
         hourNumberPicker.setMinValue(0);
@@ -60,6 +69,7 @@ public class TimerFragment extends Fragment {
         hourNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                // Calculate # of milliseconds upon input change
                 CalculateInputTimeInMilliseconds();
 
                 UpdateTimer();
@@ -73,6 +83,7 @@ public class TimerFragment extends Fragment {
         minuteNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                // Calculate # of milliseconds upon input change
                 CalculateInputTimeInMilliseconds();
 
                 UpdateTimer();
@@ -86,6 +97,7 @@ public class TimerFragment extends Fragment {
         secondNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                // Calculate # of milliseconds upon input change
                 CalculateInputTimeInMilliseconds();
 
                 UpdateTimer();
@@ -100,8 +112,11 @@ public class TimerFragment extends Fragment {
         mProgressBar = (ProgressBar) v.findViewById(R.id.TimerProgressBar);
 
         bottomTimerButtonBar = (LinearLayout) v.findViewById(R.id.TimerButtonBar);
+
+        // Disable bottom set of buttons by default
         bottomTimerButtonBar.setVisibility(View.INVISIBLE);
 
+        // Start Button
         mStartPauseTimerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -114,6 +129,7 @@ public class TimerFragment extends Fragment {
             }
         });
 
+        // Pause & Resume are handled on the same button
         mPauseTimerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -121,6 +137,7 @@ public class TimerFragment extends Fragment {
             }
         });
 
+        // Cancel Button
         mCancelTimerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -128,18 +145,15 @@ public class TimerFragment extends Fragment {
             }
         });
 
-        Bundle extras = getActivity().getIntent().getExtras();
-        if(extras != null){
-            mTimerLength =  extras.getString("TimerLength");
-        }
-
         return v;
     }
 
     public void ToggleTimer(){
+        // Same button handles pausing & resuming - so if timer is running, pause timer
         if(timerRunning){
             mPauseTimerButton.setText("Resume");
             PauseTimer();
+        // Else if timer is not running, resume timer
         } else {
             mPauseTimerButton.setText("Pause");
             StartTimer();
@@ -147,22 +161,23 @@ public class TimerFragment extends Fragment {
     }
 
     public void CancelTimer(){
+        // Change layout visuals
         mCountdownText.setVisibility(View.INVISIBLE);
         mProgressBar.setVisibility(View.INVISIBLE);
-
         numberPickerLayout.setVisibility(View.VISIBLE);
-
         mCancelTimerButton.setVisibility(View.INVISIBLE);
         bottomTimerButtonBar.setVisibility(View.INVISIBLE);
         mStartPauseTimerButton.setVisibility(View.VISIBLE);
 
+        // Pause timers
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
-
         timerRunning = false;
 
+        // Reset time (and therefore reset timers)
         timeLeftInMilliseconds = startingTimeInMilliseconds;
 
+        // Visually update changes
         UpdateTimer();
         UpdateProgressBar();
     }
@@ -170,19 +185,17 @@ public class TimerFragment extends Fragment {
     public void PauseTimer(){
         mCancelTimerButton.setVisibility(View.VISIBLE);
 
+        // Pause timers
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
-
         timerRunning = false;
     }
 
     public void StartTimer(){
-
+        // Change layout visuals
         numberPickerLayout.setVisibility(View.INVISIBLE);
-
         mCountdownText.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.VISIBLE);
-
         bottomTimerButtonBar.setVisibility(View.VISIBLE);
         mStartPauseTimerButton.setVisibility(View.INVISIBLE);
         mCancelTimerButton.setVisibility(View.INVISIBLE);
@@ -216,21 +229,21 @@ public class TimerFragment extends Fragment {
             }
         }.start();
         timerRunning = true;
-
-        UpdateTimer();
-        UpdateProgressBar();
     }
 
     private void UpdateProgressBar(){
+        // Calculate time left & Update visually
         int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
         mProgressBar.setProgress((int) timeLeftInMilliseconds);
     }
 
     public void UpdateTimer(){
+        // Calculate hours, minutes, and seconds left given milliseconds left on timer
         int hours = (int) timeLeftInMilliseconds / 3600000;
         int minutes = (int) timeLeftInMilliseconds % 3600000 / 60000;
         int seconds = (int) timeLeftInMilliseconds % 60000 / 1000;
 
+        // Display hours, minutes, and seconds to screen
         String timeLeftText = "";
 
         if(hours < 10){
@@ -253,6 +266,7 @@ public class TimerFragment extends Fragment {
     }
 
     public void CalculateInputTimeInMilliseconds(){
+        // Calculate milliseconds on timer given hours, minutes, and seconds
         startingTimeInMilliseconds = secondNumberPicker.getValue() * 1000 + minuteNumberPicker.getValue() * 60000 + hourNumberPicker.getValue() * 3600000;
         timeLeftInMilliseconds = startingTimeInMilliseconds;
     }
