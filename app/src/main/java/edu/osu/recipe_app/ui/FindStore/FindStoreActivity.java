@@ -54,25 +54,7 @@ public class FindStoreActivity extends AppCompatActivity implements
 
     }
 
-    public void findRestaurants(View v){
 
-            StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch?json?");
-            stringBuilder.append("&radius="+1000);
-            stringBuilder.append("&keyword="+"restaurant");
-            stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
-
-            String url = stringBuilder.toString();
-
-            Object dataTransfer[] = new Object[2];
-            dataTransfer[0] = mMap;
-            dataTransfer[1] = url;
-
-            GetNearbyPlace getNearbyPlace = new GetNearbyPlace();
-            getNearbyPlace.execute(dataTransfer);
-
-
-
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -118,6 +100,28 @@ public class FindStoreActivity extends AppCompatActivity implements
         lat = location.getLatitude();
         lng = location.getLongitude();
         latLng = new LatLng(lat,lng);
+
+    }
+    public void findStore(View v){
+
+        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        stringBuilder.append("location="+latLng.latitude + "," + latLng.longitude);
+        stringBuilder.append("&radius="+1500);
+        stringBuilder.append("&value="+"supermarket");
+        stringBuilder.append("&keyword="+"store");
+        stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
+
+        String url = stringBuilder.toString();
+
+        Object dataTransfer[] = new Object[2];
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url;
+
+        GetNearbyPlace getNearbyPlace = new GetNearbyPlace();
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        getNearbyPlace.execute(dataTransfer);
+
+
 
     }
 
