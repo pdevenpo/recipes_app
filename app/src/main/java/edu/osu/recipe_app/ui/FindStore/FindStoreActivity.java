@@ -54,20 +54,13 @@ public class FindStoreActivity extends AppCompatActivity implements
 
     }
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
-
         latLng = new LatLng(lat,lng);
-
-
-
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
@@ -94,6 +87,7 @@ public class FindStoreActivity extends AppCompatActivity implements
         return false;
     }
 
+    //mylocation click takes the user camera to current locations
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
@@ -102,13 +96,16 @@ public class FindStoreActivity extends AppCompatActivity implements
         latLng = new LatLng(lat,lng);
 
     }
+
     public void findStore(View v){
 
+        //Stringbuilder builds the custom URL based on location and search query information
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         stringBuilder.append("location="+latLng.latitude + "," + latLng.longitude);
-        stringBuilder.append("&radius="+1500);
+        stringBuilder.append("&radius="+"5000");
         stringBuilder.append("&value="+"supermarket");
         stringBuilder.append("&keyword="+"store");
+        //key is google places api key
         stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
 
         String url = stringBuilder.toString();
@@ -118,7 +115,6 @@ public class FindStoreActivity extends AppCompatActivity implements
         dataTransfer[1] = url;
 
         GetNearbyPlace getNearbyPlace = new GetNearbyPlace();
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         getNearbyPlace.execute(dataTransfer);
 
 
