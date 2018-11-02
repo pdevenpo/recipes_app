@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.MyRecipes;
+package edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;

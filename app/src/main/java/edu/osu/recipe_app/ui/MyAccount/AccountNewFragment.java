@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import edu.osu.recipe_app.MainActivity;
 import edu.osu.recipe_app.R;
-import edu.osu.recipe_app.ui.UserData.User;
-import edu.osu.recipe_app.ui.UserData.UserRepository;
+import edu.osu.recipe_app.ui.MyAccount.UserData.User;
+import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
 
 public class AccountNewFragment extends Fragment {
 

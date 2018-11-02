@@ -1,21 +1,24 @@
 package edu.osu.recipe_app.ui.MyRecipes;
 
-import java.io.IOException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import edu.osu.recipe_app.R;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
-public class MyRecipeActivity extends Activity{
+import java.io.IOException;
+
+import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeParser;
+
+public class WebScraper extends Activity {
+
 
     //create variables
     ProgressDialog mProgressDialog;
@@ -33,10 +36,10 @@ public class MyRecipeActivity extends Activity{
         Button titlebutton = (Button) findViewById(R.id.titlebutton);
 
         // Capture button click
-        titlebutton.setOnClickListener(new OnClickListener() {
+        titlebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 // Execute Scraper AsyncTask
-                new Scraper().execute();
+                // new Scraper().execute();
             }
         });
 
@@ -44,6 +47,13 @@ public class MyRecipeActivity extends Activity{
 
     }
 
+    public void ShowProgressDialogue(){
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setTitle("Loading Recipes");
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.show();
+    }
 
     private class Scraper extends AsyncTask<Void, Void, Void> {
         //Store variable names (may be database columns)
@@ -55,7 +65,7 @@ public class MyRecipeActivity extends Activity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mProgressDialog = new ProgressDialog(MyRecipeActivity.this);
+            mProgressDialog = new ProgressDialog(WebScraper.this);
             mProgressDialog.setTitle("Retrieving Recipe Names");
             mProgressDialog.setMessage("Cooking...");
             mProgressDialog.setIndeterminate(false);
@@ -123,7 +133,5 @@ public class MyRecipeActivity extends Activity{
             mProgressDialog.dismiss();
         }
     }
-
-
 
 }
