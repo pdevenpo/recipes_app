@@ -7,13 +7,19 @@ import java.util.Iterator;
 
 import org.json.*;
 
-public class Parser {
+import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.RecipeRepository;
+
+public class RecipeParser {
+
+    private RecipeRepository mRecipeRepository;
 
 
+    public RecipeParser(){
 
-    public ArrayList<RecipeObj> ParseJSONFile(String fileName) throws JSONException {
-        //String jsonString = readFile("db-recipes.json");
-        String jsonString = readFile(fileName);
+    }
+
+    public ArrayList<RecipeObj> Parse() throws JSONException {
+        String jsonString = readFile("db-recipes.json");
         ArrayList<RecipeObj> recipeList = new ArrayList<RecipeObj>();
         JSONObject obj = new JSONObject(jsonString.trim());
         Iterator<String> keys = obj.keys();
@@ -76,6 +82,7 @@ public class Parser {
         }
         return result;
     }
+
 
 }
 

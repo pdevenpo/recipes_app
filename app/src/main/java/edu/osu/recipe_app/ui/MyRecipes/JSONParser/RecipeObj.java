@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.JSONParser;
+package edu.osu.recipe_app.ui.MyRecipes.JSONParser;
 
 import java.util.ArrayList;
 
