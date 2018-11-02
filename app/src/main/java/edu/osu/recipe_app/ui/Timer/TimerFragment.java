@@ -1,5 +1,7 @@
 package edu.osu.recipe_app.ui.Timer;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -35,8 +37,9 @@ public class TimerFragment extends Fragment {
     private NumberPicker minuteNumberPicker;       // Number Picker for user to select # of Minutes
     private NumberPicker secondNumberPicker;       // Number Picker for user to select # of seconds
 
-    private float timeLeftInMilliseconds;          // Time currently left on timer, in milliseconds
-    private float startingTimeInMilliseconds;      // Starting time, in milliseconds
+    private long timeLeftInMilliseconds;          // Time currently left on timer, in milliseconds
+    private long startingTimeInMilliseconds;      // Starting time, in milliseconds
+    private long endTime;
 
     private boolean timerRunning;
 
@@ -46,6 +49,58 @@ public class TimerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("timerprefs", Context.MODE_PRIVATE);
+
+        timeLeftInMilliseconds = preferences.getLong("timeLeftInMilliseconds", 0);
+        startingTimeInMilliseconds = preferences.getLong("startingTimeInMilliseconds", 0);
+        timerRunning = preferences.getBoolean("timerRunning", false);
+
+        UpdateTimer();
+        UpdateProgressBar();
+
+        if(timerRunning){
+            endTime = preferences.getLong("endTime", 0);
+            timeLeftInMilliseconds = endTime - System.currentTimeMillis();
+
+            if(timeLeftInMilliseconds < 0){
+                timeLeftInMilliseconds = 0;
+                timerRunning = false;
+
+                UpdateTimer();
+                UpdateProgressBar();
+            } else {
+                StartTimer();
+            }
+        }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("timerprefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = preferences.edit();
+
+        sharedPrefEditor.putLong("timeLeftInMilliseconds", timeLeftInMilliseconds);
+        sharedPrefEditor.putLong("startingTimeInMilliseconds", startingTimeInMilliseconds);
+        sharedPrefEditor.putBoolean("timerRunning", timerRunning);
+        sharedPrefEditor.putLong("endTime", endTime);
+
+        sharedPrefEditor.apply();
+
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+
+        if (mProgressBarTimer != null) {
+            mProgressBarTimer.cancel();
+        }
     }
 
     @Override
@@ -200,6 +255,8 @@ public class TimerFragment extends Fragment {
         mStartPauseTimerButton.setVisibility(View.INVISIBLE);
         mCancelTimerButton.setVisibility(View.INVISIBLE);
 
+        endTime = System.currentTimeMillis() + timeLeftInMilliseconds;
+
         // Countdown timer for smooth progress bar visuals
         mProgressBarTimer = new CountDownTimer((long) timeLeftInMilliseconds, 1) {
             @Override
@@ -233,8 +290,10 @@ public class TimerFragment extends Fragment {
 
     private void UpdateProgressBar(){
         // Calculate time left & Update visually
-        int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
-        mProgressBar.setProgress((int) timeLeftInMilliseconds);
+        if(timerRunning) {
+            int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
+            mProgressBar.setProgress((int) timeLeftInMilliseconds);
+        }
     }
 
     public void UpdateTimer(){
