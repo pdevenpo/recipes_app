@@ -1,6 +1,10 @@
 package edu.osu.recipe_app.ui.MyRecipes;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.jsoup.Jsoup;
@@ -16,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeObj;
 import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeParser;
 
 public class MyRecipesActivity extends Activity{
@@ -23,6 +28,7 @@ public class MyRecipesActivity extends Activity{
     //create variables
     ProgressDialog mProgressDialog;
     RecipeParser mRecipeParser;
+    ArrayList<RecipeObj> mRecipeList = new ArrayList <>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -35,20 +41,39 @@ public class MyRecipesActivity extends Activity{
         // Capture button click
         titlebutton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                ShowProgressDialogue();
-                mRecipeParser = new RecipeParser();
-                try{
-                    mRecipeParser.Parse();
-                } catch (org.json.JSONException exception){
 
+                mRecipeParser = new RecipeParser();
+
+               String recipesString = ReadRecipesFile();
+
+                    try{
+                        mRecipeList = mRecipeParser.Parse(recipesString);
+                    } catch (org.json.JSONException e) {
+                        e.printStackTrace();
                 }
             }
         });
 
     }
 
-    public void ParseRecipes() throws JSONException{
+    public String ReadRecipesFile(){
+        String result = "";
+        try{
+            InputStream is = getResources().openRawResource(R.raw.recipes);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                line = br.readLine();
+            }
+            result = sb.toString();
 
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
 

@@ -1,12 +1,16 @@
 package edu.osu.recipe_app.ui.MyRecipes.JSONParser;
 
+import android.support.v7.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.*;
 
+import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.RecipeRepository;
 
 public class RecipeParser {
@@ -18,8 +22,8 @@ public class RecipeParser {
 
     }
 
-    public ArrayList<RecipeObj> Parse() throws JSONException {
-        String jsonString = readFile("db-recipes.json");
+    public ArrayList<RecipeObj> Parse(String jsonString) throws JSONException {
+        //String jsonString = readFile("raw/recipes.json");
         ArrayList<RecipeObj> recipeList = new ArrayList<RecipeObj>();
         JSONObject obj = new JSONObject(jsonString.trim());
         Iterator<String> keys = obj.keys();
@@ -66,22 +70,22 @@ public class RecipeParser {
         return returnArr;
     }
 
-    public String readFile(String filename) {
-        String result = "";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filename));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = br.readLine();
-            }
-            result = sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+//    public String readFile(String filename) {
+//        String result = "";
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader(filename));
+//            StringBuilder sb = new StringBuilder();
+//            String line = br.readLine();
+//            while (line != null) {
+//                sb.append(line);
+//                line = br.readLine();
+//            }
+//            result = sb.toString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
 
 
 }
