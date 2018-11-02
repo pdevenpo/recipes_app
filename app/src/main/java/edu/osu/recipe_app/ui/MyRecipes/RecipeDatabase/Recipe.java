@@ -15,17 +15,17 @@ public class Recipe {
     @ColumnInfo(name = "name")
     private String recipeName;
 
-    //recipe source
-    @ColumnInfo(name = "source")
-    private String recipeSource;
+//    //recipe source
+//    @ColumnInfo(name = "source")
+//    private String recipeSource;
 
     //Recipe prep times
     @ColumnInfo(name = "prepTime")
     private int recipePrepTime;
 
-    //Recipe wait time
-    @ColumnInfo(name = "waitTime")
-    private int recipeWaitTime;
+//    //Recipe wait time
+//    @ColumnInfo(name = "waitTime")
+//    private int recipeWaitTime;
 
     //Recipe cook times
     @ColumnInfo(name = "cookTime")
@@ -52,6 +52,14 @@ public class Recipe {
     public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
     }
+
+//    public String getRecipeSource() {
+//        return recipeSource;
+//    }
+//
+//    public void setRecipeSource(String name) {
+//        this.recipeSource = name;
+//    }
 
     public String getRecipeDirections() {
         return recipeDirections;

@@ -17,7 +17,7 @@ public class RecipeRepository {
         db = Room.databaseBuilder(context, AppDatabase.class, "AppDatabaseCheckpoint4").allowMainThreadQueries().build();
     }
 
-    public void insertRecipe(String recipeId, String recipeName, String recipeDirections, String recipePrepTime, String recipeCookTime, String recipeIngredients, String recipeCategory){
+    public void insertRecipe(String recipeId, String recipeName, String recipeDirections, int recipePrepTime, int recipeCookTime, String recipeIngredients, String recipeCategory){
         Recipe r = new Recipe();
 
         r.setRecipeId(recipeId);
