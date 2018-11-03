@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.UserData;
+package edu.osu.recipe_app.ui.MyAccount.UserData;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;

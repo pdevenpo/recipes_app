@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.MyRecipes;
+package edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -15,17 +15,27 @@ public class Recipe {
     @ColumnInfo(name = "name")
     private String recipeName;
 
+//    //recipe source
+//    @ColumnInfo(name = "source")
+//    private String recipeSource;
+
+    //Recipe prep times
+    @ColumnInfo(name = "prepTime")
+    private int recipePrepTime;
+
+//    //Recipe wait time
+//    @ColumnInfo(name = "waitTime")
+//    private int recipeWaitTime;
+
+    //Recipe cook times
+    @ColumnInfo(name = "cookTime")
+    private int recipeCookTime;
+
     //recipe directions(instructions)
     @ColumnInfo(name = "directions")
     private String recipeDirections;
 
-    //Recipe prep times
-    @ColumnInfo(name = "prepTime")
-    private String recipePrepTime;
 
-    //Recipe cook times
-    @ColumnInfo(name = "cookTime")
-    private String recipeCookTime;
 
     //Ingredients tuple
     @ColumnInfo(name = "ingredients")
@@ -43,6 +53,14 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
+//    public String getRecipeSource() {
+//        return recipeSource;
+//    }
+//
+//    public void setRecipeSource(String name) {
+//        this.recipeSource = name;
+//    }
+
     public String getRecipeDirections() {
         return recipeDirections;
     }
@@ -59,13 +77,13 @@ public class Recipe {
         this.recipeName = name;
     }
 
-    public String getRecipePrepTime(){return recipePrepTime;}
+    public int getRecipePrepTime(){return recipePrepTime;}
 
-    public void setRecipePrepTime(String prepTime) { this.recipePrepTime = prepTime;}
+    public void setRecipePrepTime(int prepTime) { this.recipePrepTime = prepTime;}
 
-    public String getRecipeCookTime(){return recipeCookTime;}
+    public int getRecipeCookTime(){return recipeCookTime;}
 
-    public void setRecipeCookTime(String cookTime) { this.recipeCookTime = cookTime;}
+    public void setRecipeCookTime(int cookTime) { this.recipeCookTime = cookTime;}
 
     public String getRecipeCategory(){return recipeCategory;}
 

@@ -14,7 +14,7 @@ import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.Favorites.FavoritesActivity;
 import edu.osu.recipe_app.ui.FindStore.FindStoreActivity;
 import edu.osu.recipe_app.ui.MyAccount.AccountLoginActivity;
-import edu.osu.recipe_app.ui.MyRecipes.MyRecipeActivity;
+import edu.osu.recipe_app.ui.MyRecipes.MyRecipesActivity;
 import edu.osu.recipe_app.ui.Timer.TimerActivity;
 import edu.osu.recipe_app.ui.TodaysPick.TodaysPickActivity;
 
@@ -65,7 +65,7 @@ public class FragmentPortrait extends Fragment {
         mMyRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MyRecipeActivity.class);
+                Intent intent = new Intent(getActivity(), MyRecipesActivity.class);
                 startActivity(intent);
             }
         });
