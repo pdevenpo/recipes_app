@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.osu.recipe_app.AlertReceiver;
 import edu.osu.recipe_app.R;
@@ -208,10 +209,14 @@ public class TimerFragment extends Fragment {
             public void onClick(View view){
                 CalculateInputTimeInMilliseconds();
 
-                mProgressBar.setMax((int) startingTimeInMilliseconds);
-                mProgressBar.setProgress((int) startingTimeInMilliseconds);
+                if(startingTimeInMilliseconds > 0) {
+                    mProgressBar.setMax((int) startingTimeInMilliseconds);
+                    mProgressBar.setProgress((int) startingTimeInMilliseconds);
 
-                StartTimer();
+                    StartTimer();
+                } else {
+                    Toast.makeText(getContext(),"Timer length must be longer than 0 seconds", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
