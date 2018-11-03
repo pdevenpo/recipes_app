@@ -1,6 +1,9 @@
 package edu.osu.recipe_app.ui.Timer;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +17,7 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import edu.osu.recipe_app.AlertReceiver;
 import edu.osu.recipe_app.R;
 
 public class TimerFragment extends Fragment {
@@ -69,6 +73,16 @@ public class TimerFragment extends Fragment {
         // Visually update timer
         UpdateTimer();
         UpdateProgressBar();
+
+        // Potentially use this when passing an extra from another Activity?
+        Bundle extras = getActivity().getIntent().getExtras();
+        if(extras != null){
+            mTimerLength =  extras.getString("TimerLength");
+        }
+
+        if(mTimerLength != ""){
+            GenerateStartTimeStringGivenMilliseconds();
+        }
 
         // If the timer was previously running
         if(timerRunning){
@@ -130,12 +144,6 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.timer_fragment, parent, false);
-
-        // Potentially use this when passing an extra from another Activity?
-        Bundle extras = getActivity().getIntent().getExtras();
-        if(extras != null){
-            mTimerLength =  extras.getString("TimerLength");
-        }
 
         numberPickerLayout = (LinearLayout) v.findViewById(R.id.NumberPickerLayout);
 
@@ -264,6 +272,8 @@ public class TimerFragment extends Fragment {
     public void PauseTimer(){
         mCancelTimerButton.setVisibility(View.VISIBLE);
 
+        CancelAlarm();
+
         // Pause timers
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
@@ -312,6 +322,25 @@ public class TimerFragment extends Fragment {
         }.start();
         timerRunning = true;
         timerPaused = false;
+
+        StartAlarm();
+    }
+
+    private void StartAlarm(){
+        AlarmManager alarm = (AlarmManager) this.getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(this.getContext(), AlertReceiver.class);
+        alarmIntent.putExtra("TimerLength", mTimerLength);
+        PendingIntent pendingAlarmIntent = PendingIntent.getBroadcast(this.getContext(), 1, alarmIntent, 0);
+
+        alarm.setExact(AlarmManager.RTC_WAKEUP, endTime, pendingAlarmIntent);
+    }
+
+    private void CancelAlarm(){
+        AlarmManager alarm = (AlarmManager) this.getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(this.getContext(), AlertReceiver.class);
+        PendingIntent pendingAlarmIntent = PendingIntent.getBroadcast(this.getContext(), 1, alarmIntent, 0);
+
+        alarm.cancel(pendingAlarmIntent);
     }
 
     private void UpdateProgressBar(){
@@ -353,5 +382,34 @@ public class TimerFragment extends Fragment {
         // Calculate milliseconds on timer given hours, minutes, and seconds
         startingTimeInMilliseconds = secondNumberPicker.getValue() * 1000 + minuteNumberPicker.getValue() * 60000 + hourNumberPicker.getValue() * 3600000;
         timeLeftInMilliseconds = startingTimeInMilliseconds;
+    }
+
+    public void GenerateStartTimeStringGivenMilliseconds(){
+        // Generate string in the form HH:MM:SS given starting time in milliseconds
+
+        int hours = (int) startingTimeInMilliseconds / 3600000;
+        int minutes = (int) startingTimeInMilliseconds % 3600000 / 60000;
+        int seconds = (int) startingTimeInMilliseconds % 60000 / 1000;
+
+        // Display hours, minutes, and seconds to screen
+        mTimerLength = "";
+
+        if(hours > 1){
+            mTimerLength += hours + " hours, ";
+        } else if (hours == 1){
+            mTimerLength += hours + " hour, ";
+        }
+
+        if(minutes > 1){
+            mTimerLength += minutes + " minutes, ";
+        } else if (hours == 1){
+            mTimerLength += minutes + " minute, ";
+        }
+
+        if(seconds > 1){
+            mTimerLength += seconds + " seconds";
+        } else if (hours == 1){
+            mTimerLength += seconds + " second";
+        }
     }
 }
