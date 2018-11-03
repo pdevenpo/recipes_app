@@ -47,6 +47,8 @@
         <activity android:name=".ui.MyAccount.AccountLoginActivity" />
         <activity android:name=".ui.MyAccount.AccountEditActivity" />
 
+        <receiver android:name=".AlertReceiver"/>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
