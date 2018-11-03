@@ -41,7 +41,8 @@ public class TimerFragment extends Fragment {
     private long startingTimeInMilliseconds;      // Starting time, in milliseconds
     private long endTime;
 
-    private boolean timerRunning;
+    private boolean timerRunning;                 // True if the timer is active, false if cancelled
+    private boolean timerPaused;                  // True if timer is paused, false if timer is running
 
     public TimerFragment() {
     }
@@ -55,15 +56,21 @@ public class TimerFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
+        // Retrieve saved state for timer persistence
         SharedPreferences preferences = this.getActivity().getSharedPreferences("timerprefs", Context.MODE_PRIVATE);
 
         timeLeftInMilliseconds = preferences.getLong("timeLeftInMilliseconds", 0);
         startingTimeInMilliseconds = preferences.getLong("startingTimeInMilliseconds", 0);
         timerRunning = preferences.getBoolean("timerRunning", false);
+        timerPaused = preferences.getBoolean("timerPaused", false);
 
+        mProgressBar.setMax((int) startingTimeInMilliseconds);
+
+        // Visually update timer
         UpdateTimer();
         UpdateProgressBar();
 
+        // If the timer was previously running
         if(timerRunning){
             endTime = preferences.getLong("endTime", 0);
             timeLeftInMilliseconds = endTime - System.currentTimeMillis();
@@ -77,12 +84,27 @@ public class TimerFragment extends Fragment {
             } else {
                 StartTimer();
             }
+        } else {
+            if(timerPaused){
+                mPauseTimerButton.setText("Resume");
+
+                StartTimer();
+                PauseTimer();
+
+                UpdateTimer();
+                UpdateProgressBar();
+            }
         }
     }
 
     @Override
     public void onStop(){
         super.onStop();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences("timerprefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = preferences.edit();
@@ -90,6 +112,7 @@ public class TimerFragment extends Fragment {
         sharedPrefEditor.putLong("timeLeftInMilliseconds", timeLeftInMilliseconds);
         sharedPrefEditor.putLong("startingTimeInMilliseconds", startingTimeInMilliseconds);
         sharedPrefEditor.putBoolean("timerRunning", timerRunning);
+        sharedPrefEditor.putBoolean("timerPaused", timerPaused);
         sharedPrefEditor.putLong("endTime", endTime);
 
         sharedPrefEditor.apply();
@@ -228,6 +251,7 @@ public class TimerFragment extends Fragment {
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
         timerRunning = false;
+        timerPaused = false;
 
         // Reset time (and therefore reset timers)
         timeLeftInMilliseconds = startingTimeInMilliseconds;
@@ -244,6 +268,7 @@ public class TimerFragment extends Fragment {
         mProgressBarTimer.cancel();
         mCountDownTimer.cancel();
         timerRunning = false;
+        timerPaused = true;
     }
 
     public void StartTimer(){
@@ -282,16 +307,16 @@ public class TimerFragment extends Fragment {
 
             @Override
             public void onFinish() {
-
+                CancelTimer();
             }
         }.start();
         timerRunning = true;
+        timerPaused = false;
     }
 
     private void UpdateProgressBar(){
         // Calculate time left & Update visually
-        if(timerRunning) {
-            int progress = (int) ((timeLeftInMilliseconds / startingTimeInMilliseconds) * 100);
+        if(timerRunning || timerPaused) {
             mProgressBar.setProgress((int) timeLeftInMilliseconds);
         }
     }
