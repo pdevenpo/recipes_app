@@ -10,78 +10,29 @@ import org.json.JSONException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import edu.osu.recipe_app.R;
-import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeObj;
-import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeParser;
 
-public class MyRecipesActivity extends Activity{
-
-    //create variables
-    ProgressDialog mProgressDialog;
-    RecipeParser mRecipeParser;
-    ArrayList<RecipeObj> mRecipeList = new ArrayList <>();
+public class MyRecipesActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_recipes_activity);
+        setContentView(R.layout.my_recipes_fragment_container);
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.MyRecipesFragmentContainer);
 
-        // Locate the Buttons in activity_main.xml
-        Button titlebutton = (Button) findViewById(R.id.titlebutton);
-
-        // Capture button click
-        titlebutton.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-
-                mRecipeParser = new RecipeParser();
-
-               String recipesString = ReadRecipesFile();
-
-                    try{
-                        mRecipeList = mRecipeParser.Parse(recipesString);
-                    } catch (org.json.JSONException e) {
-                        e.printStackTrace();
-                }
-            }
-        });
-
-    }
-
-    public String ReadRecipesFile(){
-        String result = "";
-        try{
-            InputStream is = getResources().openRawResource(R.raw.recipes);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = br.readLine();
-            }
-            result = sb.toString();
-
-
-        } catch (IOException e){
-            e.printStackTrace();
+        if(fragment == null){
+            fragment = new MyRecipesFragment();
+            fm.beginTransaction()
+                    .add(R.id.MyRecipesFragmentContainer, fragment)
+                    .commit();
         }
-        return result;
     }
 
-
-    public void ShowProgressDialogue(){
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setTitle("Parsing Recipes");
-        //mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setIndeterminate(false);
-        mProgressDialog.show();
-    }
 }
