@@ -199,6 +199,8 @@ public class TimerFragment extends Fragment {
             public void onClick(View view){
                 CalculateInputTimeInMilliseconds();
 
+                GenerateStartTimeStringGivenMilliseconds();
+
                 if(startingTimeInMilliseconds > 0) {
                     mProgressBar.setMax((int) startingTimeInMilliseconds);
                     mProgressBar.setProgress((int) startingTimeInMilliseconds);
@@ -288,15 +290,6 @@ public class TimerFragment extends Fragment {
     }
 
     public void StartTimer(){
-
-        // Potentially use this when passing an extra from another Activity?
-        Bundle extras = getActivity().getIntent().getExtras();
-        if(extras != null){
-            mTimerLength =  extras.getString("TimerLength");
-        } else {
-            GenerateStartTimeStringGivenMilliseconds();
-        }
-
         // Change layout visuals
         numberPickerLayout.setVisibility(View.INVISIBLE);
         mCountdownText.setVisibility(View.VISIBLE);
@@ -347,7 +340,7 @@ public class TimerFragment extends Fragment {
         alarmIntent.putExtra("TimerLength", mTimerLength);
         PendingIntent pendingAlarmIntent = PendingIntent.getBroadcast(this.getContext(), 1, alarmIntent, 0);
 
-        alarm.setExact(AlarmManager.RTC_WAKEUP, endTime, pendingAlarmIntent);
+        alarm.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingAlarmIntent);
     }
 
     private void CancelAlarm(){
@@ -417,13 +410,13 @@ public class TimerFragment extends Fragment {
 
         if(minutes > 1){
             mTimerLength += minutes + " minutes, ";
-        } else if (hours == 1){
+        } else if (minutes == 1){
             mTimerLength += minutes + " minute, ";
         }
 
         if(seconds > 1){
             mTimerLength += seconds + " seconds";
-        } else if (hours == 1){
+        } else if (seconds == 1){
             mTimerLength += seconds + " second";
         }
     }

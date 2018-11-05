@@ -21,6 +21,7 @@ public class AlertReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         if(extras != null){
             timerLength =  extras.getString("TimerLength");
+            extras.clear();
         }
 
         // Intent to open upon clicking notification
