@@ -69,11 +69,6 @@ public class RecipeScraper {
 //            mProgressDialog.dismiss();
         }
 
-
-
-
-
-
 //    public void webScrape(){
 
         //create a new thread for performance reasoning
