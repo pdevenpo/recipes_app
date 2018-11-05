@@ -8,7 +8,8 @@
     tools:context=".ui.TodaysPick.TodaysPickFragment">
 
 
-
-
-
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recipe_list"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>
