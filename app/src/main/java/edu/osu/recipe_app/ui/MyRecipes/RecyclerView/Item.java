@@ -3,11 +3,11 @@ package edu.osu.recipe_app.ui.MyRecipes.RecyclerView;
 public class Item {
 
     private String name;
-    private int length;
+    private String tags;
 
-    public Item(String name, int length){
+    public Item(String name, String tags){
         this.name = name;
-        this.length = length;
+        this.tags = tags;
     }
 
     public String getName() {
@@ -18,11 +18,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getLength() {
-        return length;
+    public String getLength() {
+        return tags;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setLength(String tags) {
+        this.tags = tags;
     }
 }

@@ -42,6 +42,8 @@ public class MyRecipesFragment extends Fragment {
     List<Item> items = new ArrayList <>();
     MyAdapter adapter = null;
 
+    private int counter = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -56,55 +58,8 @@ public class MyRecipesFragment extends Fragment {
 
         mRecipeRepository = new RecipeRepository(this.getContext());
 
-        randomData(10); //generate random placeholder data for the recyclerview
-
-        RecyclerView recycler = (RecyclerView) v.findViewById(R.id.recycler);
-        recycler.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        adapter = new MyAdapter(recycler, this.getActivity(), items);
-        recycler.setAdapter(adapter);
-
-        //set load more event
-        adapter.setLoadMore(new ILoadMore() {
-            @Override
-            public void onLoadMore() {
-                if(items.size() <= 20){
-                    items.add(null);
-                    adapter.notifyItemInserted(items.size() - 1);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            items.remove(items.size() - 1);
-                            adapter.notifyItemRemoved(items.size());
-
-                            //random more data
-                            int index = items.size();
-                            int end = index + 10;
-                            for(int i = index; i < end; i++){
-                                String name = UUID.randomUUID().toString();
-                                Item item = new Item(name, name.length());
-                                items.add(item);
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
-                        }
-                        }, 5000);
-                } else {
-                    Toast.makeText(getActivity(), "Load data completed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         return v;
     }
 
-    private void randomData(int length){
-        //create random data
-        for(int i = 0; i < length; i++){
-            String name = UUID.randomUUID().toString();
-            Item item = new Item(name, name.length());
-            items.add(item);
-        }
-
-    }
 
 }
