@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class RecipeObj {
 
-    private static String mId;
-    private String mName;
+    private String mId; //
+    private String mName; //
     private String mSource;
-    private int mPrepTime;
+    private int mPrepTime; //=?
     private int mWaitTime;
-    private int mCookTime;
+    private int mCookTime; //=?
     private int mServings;
     private String mComments;
     private int mCalories;
@@ -19,8 +19,8 @@ public class RecipeObj {
     private int mFiber;
     private int mSugar;
     private int mProtein;
-    private String mInstructions;
-    private ArrayList<String> mIngredients;
+    private String mInstructions; //
+    private ArrayList<String> mIngredients; //
     private ArrayList<String> mTags;
 
     public RecipeObj() {

@@ -28,6 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/titletxt"
             android:text="Populate Database"></Button>
+
+        <Button
+            android:id="@+id/displayDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titletxt"
+            android:text="List Recipes in Debug"></Button>
     </LinearLayout>
 
 

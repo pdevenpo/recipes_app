@@ -75,16 +75,6 @@ public class TimerFragment extends Fragment {
         UpdateTimer();
         UpdateProgressBar();
 
-        // Potentially use this when passing an extra from another Activity?
-        Bundle extras = getActivity().getIntent().getExtras();
-        if(extras != null){
-            mTimerLength =  extras.getString("TimerLength");
-        }
-
-        if(mTimerLength != ""){
-            GenerateStartTimeStringGivenMilliseconds();
-        }
-
         // If the timer was previously running
         if(timerRunning){
             endTime = preferences.getLong("endTime", 0);
@@ -266,8 +256,19 @@ public class TimerFragment extends Fragment {
         timerRunning = false;
         timerPaused = false;
 
+        startingTimeInMilliseconds = 0;
+
         // Reset time (and therefore reset timers)
-        timeLeftInMilliseconds = startingTimeInMilliseconds;
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("timerprefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = preferences.edit();
+
+        sharedPrefEditor.putLong("timeLeftInMilliseconds", 0);
+        sharedPrefEditor.putLong("startingTimeInMilliseconds", 0);
+        sharedPrefEditor.putBoolean("timerRunning", false);
+        sharedPrefEditor.putBoolean("timerPaused", false);
+        sharedPrefEditor.putLong("endTime", 0);
+
+        sharedPrefEditor.apply();
 
         // Visually update changes
         UpdateTimer();
@@ -287,6 +288,15 @@ public class TimerFragment extends Fragment {
     }
 
     public void StartTimer(){
+
+        // Potentially use this when passing an extra from another Activity?
+        Bundle extras = getActivity().getIntent().getExtras();
+        if(extras != null){
+            mTimerLength =  extras.getString("TimerLength");
+        } else {
+            GenerateStartTimeStringGivenMilliseconds();
+        }
+
         // Change layout visuals
         numberPickerLayout.setVisibility(View.INVISIBLE);
         mCountdownText.setVisibility(View.VISIBLE);
