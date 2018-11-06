@@ -46,7 +46,7 @@
         <activity android:name=".ui.MyAccount.AccountNewActivity" />
         <activity android:name=".ui.MyAccount.AccountLoginActivity" />
         <activity android:name=".ui.MyAccount.AccountEditActivity" />
-
+        <activity android:name=".ui.MyRecipes.ViewRecipe.ViewRecipeActivity" />
         <receiver android:name=".AlertReceiver"/>
 
         <!--

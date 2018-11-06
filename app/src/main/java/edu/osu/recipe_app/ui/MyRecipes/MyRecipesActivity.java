@@ -6,12 +6,15 @@ package edu.osu.recipe_app.ui.MyRecipes;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.LinearLayoutManager;
         import android.support.v7.widget.RecyclerView;
+        import android.view.View;
+        import android.widget.Button;
         import android.widget.Toast;
 
         import java.util.ArrayList;
         import java.util.List;
         import java.util.StringJoiner;
         import java.util.UUID;
+        import android.content.Intent;
 
         import edu.osu.recipe_app.R;
         import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.Recipe;
@@ -24,6 +27,7 @@ public class MyRecipesActivity extends AppCompatActivity {
 
     List<Item> items = new ArrayList <>();
     MyAdapter adapter = null;
+    //Button mRecipeButton;
 
     private RecipeRepository mRecipeRepository;
     private List<Recipe> mRecipesList;
@@ -49,7 +53,6 @@ public class MyRecipesActivity extends AppCompatActivity {
         mRecipeRepository = new RecipeRepository(this);
         mRecipesList = mRecipeRepository.listRecipes();
 
-
         setContentView(R.layout.my_recipes_recyclerview);
         getRecipesToDisplay(0, mInitialLoadNumber);
 
@@ -57,6 +60,8 @@ public class MyRecipesActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(recycler, this, items);
         recycler.setAdapter(adapter);
+
+        //mRecipeButton = findViewById(R.id.recipeButton);
 
         //set load more event
         adapter.setLoadMore(new ILoadMore() {
@@ -78,7 +83,6 @@ public class MyRecipesActivity extends AppCompatActivity {
                             //randomData(index, end);
                             getRecipesToDisplay(index, end);
 
-
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
                         }
@@ -88,6 +92,7 @@ public class MyRecipesActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void getRecipesToDisplay(int index, int end){

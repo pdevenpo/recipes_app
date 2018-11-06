@@ -31,18 +31,15 @@ public class MyRecipesFragment extends Fragment {
     //create variables
     private final String TAG = "RecipeActivity";
 
-    private ProgressDialog mProgressDialog;
-    private RecipeParser mRecipeParser;
-    private Button mDatabaseButton;
-    private Button mListRecipesDebug;
-
-    private ArrayList<RecipeObj> mRecipeList = new ArrayList <>();
-    private RecipeRepository mRecipeRepository;
-
     List<Item> items = new ArrayList <>();
     MyAdapter adapter = null;
+    Button mRecipeButton;
 
-    private int counter = 0;
+    private RecipeRepository mRecipeRepository;
+    private List<Recipe> mRecipesList;
+
+    int counter = 0; //counter for which recipe to pull from the database
+    int mInitialLoadNumber = 10; //sets how many you want to load at a time
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -56,10 +53,11 @@ public class MyRecipesFragment extends Fragment {
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.my_recipes_recyclerview, parent, false);
 
-        mRecipeRepository = new RecipeRepository(this.getContext());
 
         return v;
     }
+
+
 
 
 }
