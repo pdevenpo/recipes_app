@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,11 +29,13 @@ class LoadingViewHolder extends RecyclerView.ViewHolder{
 
 class ItemViewHolder extends RecyclerView.ViewHolder{
     public TextView mName, mLength;
+    public Button mRecipeButton;
 
     public ItemViewHolder(View itemView){
         super(itemView);
         mName = itemView.findViewById(R.id.txtName);
         mLength = itemView.findViewById(R.id.txtLength);
+        mRecipeButton = itemView.findViewById(R.id.recipeButton);
     }
 }
 
@@ -102,6 +105,15 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             viewHolder.mName.setText(items.get(position).getName());
             viewHolder.mLength.setText(String.valueOf(items.get(position).getLength()));
+
+            viewHolder.mRecipeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Intent intent = new Intent(this, MyRecipeActivity.class);
+                //startActivity(intent);
+            }
+        });
+
         } else if (holder instanceof LoadingViewHolder){
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
