@@ -2,6 +2,7 @@ package edu.osu.recipe_app.ui.MyRecipes.RecyclerView;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +14,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.List;
 
 import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.MyRecipes.MyRecipesActivity;
+import edu.osu.recipe_app.ui.MyRecipes.ViewRecipe.ViewRecipeActivity;
 
 class LoadingViewHolder extends RecyclerView.ViewHolder{
     public ProgressBar progressBar;
@@ -27,15 +32,35 @@ class LoadingViewHolder extends RecyclerView.ViewHolder{
 
 }
 
-class ItemViewHolder extends RecyclerView.ViewHolder{
-    public TextView mName, mLength;
-    public Button mRecipeButton;
+class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    public TextView mName, mTags;
+    //public Button mRecipeButton;
+
+    private ItemClickListener itemClickListener;
 
     public ItemViewHolder(View itemView){
         super(itemView);
         mName = itemView.findViewById(R.id.txtName);
-        mLength = itemView.findViewById(R.id.txtLength);
-        mRecipeButton = itemView.findViewById(R.id.recipeButton);
+        mTags = itemView.findViewById(R.id.txtLength);
+        //mRecipeButton = itemView.findViewById(R.id.recipeButton);
+
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
+    @Override
+    public void onClick(View v){
+        itemClickListener.onClick(v, getAdapterPosition(), false);
+    }
+
+    public boolean onLongClick(View v){
+        itemClickListener.onClick(v, getAdapterPosition(), true);
+        return true;
+//        return false;
     }
 }
 
@@ -90,6 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == VIEW_TYPE_ITEM){
             View view = LayoutInflater.from(activity).inflate(R.layout.item_layout, parent, false);
+
             return new ItemViewHolder(view);
         } else if (viewType == VIEW_TYPE_LOADING){
             View view = LayoutInflater.from(activity).inflate(R.layout.item_loading, parent, false);
@@ -104,21 +130,43 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Item item = items.get(position);
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             viewHolder.mName.setText(items.get(position).getName());
-            viewHolder.mLength.setText(String.valueOf(items.get(position).getLength()));
+            viewHolder.mTags.setText(String.valueOf(items.get(position).getLength()));
 
-            viewHolder.mRecipeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //Intent intent = new Intent(this, MyRecipeActivity.class);
-                //startActivity(intent);
-            }
-        });
+            viewHolder.setItemClickListener(new ItemClickListener() {
+                @Override
+                public void onClick(View view, int position, boolean isLongClick) {
+//                    Item clickedItem = items.get(position);
+//                    Toast.makeText(activity, clickedItem.getName(), Toast.LENGTH_SHORT).show();
+//                    if(isLongClick){
+//                        Toast.makeText(activity, "Long Click: " + items.get(position), Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(activity, "Short Click: " + items.get(position), Toast.LENGTH_SHORT).show();
+//                    }
+                    Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
+                    intent.putExtra("Recipe", position);
+                    view.getContext().startActivity(intent);
+
+                }
+            });
+
+//            viewHolder.mRecipeButton.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//
+//                    Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
+//                    //intent.putExtra("Recipe", position);
+//                    view.getContext().startActivity(intent);
+//                }
+//            });
 
         } else if (holder instanceof LoadingViewHolder){
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
     }
+
+
+
 
     @Override
     public int getItemCount() {

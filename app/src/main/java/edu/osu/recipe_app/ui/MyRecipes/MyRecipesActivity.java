@@ -27,7 +27,7 @@ public class MyRecipesActivity extends AppCompatActivity {
 
     List<Item> items = new ArrayList <>();
     MyAdapter adapter = null;
-    Button mRecipeButton;
+    //Button mRecipeButton;
 
     private RecipeRepository mRecipeRepository;
     private List<Recipe> mRecipesList;
