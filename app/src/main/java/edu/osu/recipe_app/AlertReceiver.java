@@ -16,6 +16,7 @@ public class AlertReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent){
+        // Potentially use this when the Intent/Extra bug is fixed
         String timerLength = "";
 
         Bundle extras = intent.getExtras();
@@ -34,7 +35,7 @@ public class AlertReceiver extends BroadcastReceiver {
                 // Notification icon
                 .setSmallIcon(R.drawable.ic_timer_notification)
                 .setContentTitle("Timer Complete")
-                .setContentText("Your timer set for " + timerLength + " is complete")
+                .setContentText("Timer complete")
                 // Priority = MAX
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 // Set the intent that will fire when the user taps the notification
