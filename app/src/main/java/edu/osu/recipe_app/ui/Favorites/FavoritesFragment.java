@@ -29,7 +29,7 @@ public class FavoritesFragment extends Fragment {
         super.onCreateView(inflater, parent, savedInstanceState);
         View v = inflater.inflate(R.layout.favorites_fragment, parent, false);
         RecyclerView rv = new RecyclerView(getContext());
-        rv = (RecyclerView) v.findViewById(R.id.favorites_list);
+        //rv = (RecyclerView) v.findViewById(R.id.favorites_list);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(new FavoritesAdapter(strings));
 
