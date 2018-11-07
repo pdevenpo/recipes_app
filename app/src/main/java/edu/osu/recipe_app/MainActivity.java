@@ -44,13 +44,6 @@ public final class MainActivity extends AppCompatActivity {
     private ArrayList<RecipeObj> mRecipeList = new ArrayList <>();
     private RecipeRepository mRecipeRepository;
 
-
-
-
-
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(this.s, "Activity Created");
@@ -78,17 +71,17 @@ public final class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction.commit();
 
-        mRecipeRepository = new RecipeRepository(this);
-        mRecipeParser = new RecipeParser();
-
-        String recipesString = ReadRecipesFile();
-
-        try{
-            mRecipeList = mRecipeParser.Parse(recipesString);
-        } catch (org.json.JSONException e) {
-            e.printStackTrace();
-        }
-        populateDatabase(mRecipeList);
+//        mRecipeRepository = new RecipeRepository(this);
+//        mRecipeParser = new RecipeParser();
+//
+//        String recipesString = ReadRecipesFile();
+//
+//        try{
+//            mRecipeList = mRecipeParser.Parse(recipesString);
+//        } catch (org.json.JSONException e) {
+//            e.printStackTrace();
+//        }
+//        populateDatabase(mRecipeList);
         
 
         createNotificationChannel();
