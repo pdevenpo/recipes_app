@@ -13,7 +13,7 @@ public class UserRepository {
     private AppDatabase db;
 
     public UserRepository(Context context){
-        db = Room.databaseBuilder(context, AppDatabase.class, "AppDatabaseCheckpoint4ForGrader").allowMainThreadQueries().build();
+        db = Room.databaseBuilder(context, AppDatabase.class, "AppDatabaseCheckpoint5").allowMainThreadQueries().build();
     }
 
     public void insertUser(String email, String password, String name){
