@@ -18,12 +18,15 @@ public class ViewRecipeActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.ViewRecipeContainer);
 
-        int mRecipeListNumber = 0;
+        //int mRecipeListNumber = 0;
+        //int mRecipeListNumber;
+
         //pass integer of which recipe was passed
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            mRecipeListNumber = extras.getInt("Recipe");
-        }
+        int mRecipeListNumber = extras.getInt("Recipe");
+//        if(extras != null){
+//            mRecipeListNumber = extras.getInt("Recipe");
+//        }
 
         if(fragment == null){
             fragment = new ViewRecipeFragment();

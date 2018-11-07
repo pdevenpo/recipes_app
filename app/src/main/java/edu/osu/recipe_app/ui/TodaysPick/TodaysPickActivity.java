@@ -117,11 +117,11 @@ public class TodaysPickActivity extends AppCompatActivity {
         int result = Integer.parseInt(daysSubString);
 
         if(result > 0 && result <= 10){
-            num = 3;
+            num = 0;
         }else if(result>10 && result<=20){
-            num = 5;
+            num = 0;
         }else{
-            num = 8;
+            num = 0;
         }
 
 

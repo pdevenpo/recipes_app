@@ -137,7 +137,6 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Item item = items.get(holder.getAdapterPosition());
             viewHolder.mName.setText(item.getName());
             viewHolder.mTags.setText(String.valueOf(item.getLength()));
-
             viewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int adapterPos, boolean isLongClick) {
@@ -153,7 +152,6 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
-        //notifyDataSetChanged();
     }
 
     @Override
