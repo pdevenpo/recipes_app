@@ -1,26 +1,20 @@
-package edu.osu.recipe_app.ui.MyRecipes.RecyclerView;
+package edu.osu.recipe_app.ui.TodaysPick.RecyclerView;
 
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.content.Intent;
-import android.widget.Toast;
 
 import java.util.List;
 
 import edu.osu.recipe_app.R;
-import edu.osu.recipe_app.ui.MyRecipes.MyRecipesActivity;
 import edu.osu.recipe_app.ui.MyRecipes.ViewRecipe.ViewRecipeActivity;
 
 class LoadingViewHolder extends RecyclerView.ViewHolder{
@@ -36,7 +30,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     public TextView mName, mTags;
     //public Button mRecipeButton;
 
-    private ItemClickListener itemClickListener;
+    private ItemClickListenerToday itemClickListener;
 
     public ItemViewHolder(View itemView){
         super(itemView);
@@ -48,7 +42,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         itemView.setOnLongClickListener(this);
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
+    public void setItemClickListener(ItemClickListenerToday itemClickListener){
         this.itemClickListener = itemClickListener;
     }
 
@@ -64,16 +58,16 @@ class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     }
 }
 
-public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyAdapterToday extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_TYPE_ITEM = 0, VIEW_TYPE_LOADING = 1;
-    ILoadMore loadMore;
+    ILoadMoreToday loadMore;
     boolean isLoading;
     Activity activity;
-    List<Item> items;
+    List<ItemToday> items;
     int visibleThreshold = 5;
     int lastVisibleItem, totalItemCount;
 
-    public MyAdapter(RecyclerView recyclerView, Activity activity, List<Item> items){
+    public MyAdapterToday(RecyclerView recyclerView, Activity activity, List<ItemToday> items){
         this.activity = activity;
         this.items = items;
 
@@ -86,7 +80,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
                 if(!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)){
                     if(loadMore != null){
-                        loadMore.onLoadMore();
+                        //loadMore.onLoadMore();
                         isLoading = true;
                     }
                 }
@@ -105,7 +99,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return items.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    public void setLoadMore(ILoadMore loadMore){
+    public void setLoadMore(ILoadMoreToday loadMore){
         this.loadMore = loadMore;
     }
 
@@ -127,22 +121,28 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof ItemViewHolder){
+            ItemToday item = items.get(holder.getAdapterPosition());
             int adapterPos=holder.getAdapterPosition();
             if (adapterPos<0){
                 adapterPos*=-1;
             }
-
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
-
-            Item item = items.get(holder.getAdapterPosition());
             viewHolder.mName.setText(items.get(holder.getAdapterPosition()).getName());
             viewHolder.mTags.setText(String.valueOf(items.get(holder.getAdapterPosition()).getLength()));
 
-            viewHolder.setItemClickListener(new ItemClickListener() {
+            viewHolder.setItemClickListener(new ItemClickListenerToday() {
                 @Override
                 public void onClick(View view, int adapterPos, boolean isLongClick) {
+                    adapterPos = holder.getAdapterPosition();
+//                    ItemToday clickedItem = items.get(position);
+//                    Toast.makeText(activity, clickedItem.getName(), Toast.LENGTH_SHORT).show();
+//                    if(isLongClick){
+//                        Toast.makeText(activity, "Long Click: " + items.get(position), Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(activity, "Short Click: " + items.get(position), Toast.LENGTH_SHORT).show();
+//                    }
                     Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
-                    intent.putExtra("Recipe", holder.getAdapterPosition());
+                    intent.putExtra("Recipe", adapterPos);
                     view.getContext().startActivity(intent);
 
                 }

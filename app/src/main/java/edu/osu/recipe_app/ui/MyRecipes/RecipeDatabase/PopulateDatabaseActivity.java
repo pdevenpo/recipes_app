@@ -1,4 +1,4 @@
-package edu.osu.recipe_app.ui.MyRecipes;
+package edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.MyRecipes.MyRecipesFragment;
 
 public class PopulateDatabaseActivity extends AppCompatActivity {
 

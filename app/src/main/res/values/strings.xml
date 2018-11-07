@@ -12,4 +12,6 @@
     <!--api keys-->
     <string name="google_places_key">AIzaSyAQrWxqWmVFQ1n5kt6rrrb9Ujq5I5yC4OI</string>
 
+    <!--todays pick strings-->
+    <string name="todays_pick_string">We hope you enjoy Today\'s Pick!</string>
 </resources>

@@ -5,73 +5,51 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.Recipe;
+import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.RecipeRepository;
+import edu.osu.recipe_app.ui.TodaysPick.RecyclerView.ItemToday;
+import edu.osu.recipe_app.ui.TodaysPick.RecyclerView.MyAdapterToday;
 
 public class TodaysPickFragment extends Fragment {
-    private RecyclerView mTodaysPickRecyclerView;
-    private RecyclerView.Adapter mTodaysPickAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private String[] mTodaysPickList;
-    String[] strings = {"1", "2", "3", "4", "5", "6", "7"};
+    //create variables
+    private final String TAG = "RecipeActivity";
+
+    List<ItemToday> items = new ArrayList<>();
+    MyAdapterToday adapter = null;
+    Button mRecipeButton;
+
+    private RecipeRepository mRecipeRepository;
+    private List<Recipe> mRecipesList;
+
+    int counter = 0; //counter for which recipe to pull from the database
+    int mInitialLoadNumber = 10; //sets how many you want to load at a time
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        Log.d(this.TAG, "OnCreateView");
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.todays_pick_fragment, parent, false);
+        View v = inflater.inflate(R.layout.todays_pick_recyclerview, parent, false);
 
 
-        RecyclerView rv = new RecyclerView(getContext());
-        rv = (RecyclerView) v.findViewById(R.id.recipe_list);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv.setAdapter(new TodaysPickAdapter(strings));
         return v;
     }
-
-    public class TodaysPickAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
-        private String[] dataSource;
-        public TodaysPickAdapter(String[] dataArgs){
-            dataSource = dataArgs;
-        }
-
-        @Override
-        public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = new TextView(parent.getContext());
-            SimpleViewHolder viewHolder = new SimpleViewHolder(view);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(SimpleViewHolder holder, int position) {
-            holder.textView.setText(dataSource[position]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataSource.length;
-        }
-    }
-
-
-    public static class SimpleViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
-        public SimpleViewHolder(View itemView) {
-            super(itemView);
-            textView = (TextView) itemView;
-        }
-    }
-
 
 
 

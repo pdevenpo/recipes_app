@@ -3,6 +3,7 @@ package edu.osu.recipe_app.ui.MyRecipes.ViewRecipe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,8 +20,11 @@ import edu.osu.recipe_app.MainActivity;
 import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.MyAccount.UserData.User;
 import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
+import edu.osu.recipe_app.ui.MyRecipes.MyRecipesActivity;
+import edu.osu.recipe_app.ui.MyRecipes.MyRecipesFragment;
 import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.Recipe;
 import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.RecipeRepository;
+import edu.osu.recipe_app.ui.MyRecipes.RecyclerView.MyAdapter;
 
 public class ViewRecipeFragment extends Fragment {
 

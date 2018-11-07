@@ -16,6 +16,7 @@ package edu.osu.recipe_app.ui.MyRecipes;
         import java.util.UUID;
         import android.content.Intent;
 
+        import edu.osu.recipe_app.MainActivity;
         import edu.osu.recipe_app.R;
         import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.Recipe;
         import edu.osu.recipe_app.ui.MyRecipes.RecipeDatabase.RecipeRepository;
@@ -38,6 +39,7 @@ public class MyRecipesActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         //fragment code will add back later.
 //        setContentView(R.layout.my_recipes_fragment_container);
 //        FragmentManager fm = getSupportFragmentManager();
