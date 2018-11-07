@@ -70,7 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     boolean isLoading;
     Activity activity;
     List<Item> items;
-    int visibleThreshold = 5;
+    int visibleThreshold = 10;
     int lastVisibleItem, totalItemCount;
 
     public MyAdapter(RecyclerView recyclerView, Activity activity, List<Item> items){
@@ -126,52 +126,40 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+        int adapterPos=holder.getAdapterPosition();
+        if (adapterPos<0){
+            adapterPos*=-1;
+        }
+        position = adapterPos;
+
         if(holder instanceof ItemViewHolder){
-            int adapterPos=holder.getAdapterPosition();
-            if (adapterPos<0){
-                adapterPos*=-1;
-            }
-
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
-
             Item item = items.get(holder.getAdapterPosition());
-            viewHolder.mName.setText(items.get(holder.getAdapterPosition()).getName());
-            viewHolder.mTags.setText(String.valueOf(items.get(holder.getAdapterPosition()).getLength()));
+            viewHolder.mName.setText(item.getName());
+            viewHolder.mTags.setText(String.valueOf(item.getLength()));
 
             viewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int adapterPos, boolean isLongClick) {
+                    view.setVisibility(View.VISIBLE);
                     Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
-                    intent.putExtra("Recipe", holder.getAdapterPosition());
+                    intent.putExtra("Recipe", adapterPos);
                     view.getContext().startActivity(intent);
 
                 }
             });
 
-//            viewHolder.mRecipeButton.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View view){
-//
-//                    Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
-//                    //intent.putExtra("Recipe", position);
-//                    view.getContext().startActivity(intent);
-//                }
-//            });
-
         } else if (holder instanceof LoadingViewHolder){
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
+        //notifyDataSetChanged();
     }
-
-
-
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
 
     public void setLoaded(){
         isLoading = false;

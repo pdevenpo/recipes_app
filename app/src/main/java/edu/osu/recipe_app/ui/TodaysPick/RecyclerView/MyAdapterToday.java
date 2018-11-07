@@ -143,6 +143,7 @@ public class MyAdapterToday extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    }
                     Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
                     intent.putExtra("Recipe", adapterPos);
+                    //intent.pu
                     view.getContext().startActivity(intent);
 
                 }

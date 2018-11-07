@@ -65,6 +65,8 @@ public class ViewRecipeFragment extends Fragment {
         int args = getArguments().getInt("Recipe");
         if(args >= 0){
             mRecipePosition = args;
+        }else if(args<0){
+            mRecipePosition = args * -1;
         }
 
         mRecipeTitle = v.findViewById(R.id.recipeTitle);
