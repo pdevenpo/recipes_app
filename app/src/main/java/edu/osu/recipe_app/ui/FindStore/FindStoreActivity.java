@@ -81,13 +81,10 @@ public class FindStoreActivity extends AppCompatActivity implements
 
     @Override
     public boolean onMyLocationButtonClick() {
-
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
         return false;
     }
 
-    //mylocation click takes the user camera to current locations
+    //On click of button in corner of map, get user's current location and pan camera to location
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
@@ -101,8 +98,11 @@ public class FindStoreActivity extends AppCompatActivity implements
 
         //Stringbuilder builds the custom URL based on location and search query information
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        //append user current location from above
         stringBuilder.append("location="+latLng.latitude + "," + latLng.longitude);
+        //area to search around user
         stringBuilder.append("&radius="+"5000");
+        //google place search key words
         stringBuilder.append("&value="+"supermarket");
         stringBuilder.append("&keyword="+"store");
         //key is google places api key
@@ -113,21 +113,19 @@ public class FindStoreActivity extends AppCompatActivity implements
         Object dataTransfer[] = new Object[2];
         dataTransfer[0] = mMap;
         dataTransfer[1] = url;
-
+        //retrieve the locations nearby to user location based on above query
         GetNearbyPlace getNearbyPlace = new GetNearbyPlace();
         getNearbyPlace.execute(dataTransfer);
 
-
-
     }
 
+    //request permission to use google maps and retrieve user locations
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
             return;
         }
-
         if (PermissionUtils.isPermissionGranted(permissions, grantResults,
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Enable the my location layer if the permission has been granted.
@@ -138,6 +136,7 @@ public class FindStoreActivity extends AppCompatActivity implements
         }
     }
 
+    //Below two methods handle a user denying access to the location services.
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
@@ -148,9 +147,6 @@ public class FindStoreActivity extends AppCompatActivity implements
         }
     }
 
-    /**
-     * Displays a dialog with error message explaining that the location permission is missing.
-     */
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");

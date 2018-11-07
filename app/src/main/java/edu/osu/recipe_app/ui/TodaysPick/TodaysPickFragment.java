@@ -25,16 +25,6 @@ public class TodaysPickFragment extends Fragment {
     //create variables
     private final String TAG = "RecipeActivity";
 
-    List<ItemToday> items = new ArrayList<>();
-    MyAdapterToday adapter = null;
-    Button mRecipeButton;
-
-    private RecipeRepository mRecipeRepository;
-    private List<Recipe> mRecipesList;
-
-    int counter = 0; //counter for which recipe to pull from the database
-    int mInitialLoadNumber = 10; //sets how many you want to load at a time
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

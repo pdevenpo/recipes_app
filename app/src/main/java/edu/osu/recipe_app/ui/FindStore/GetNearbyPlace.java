@@ -31,11 +31,8 @@ public class GetNearbyPlace extends AsyncTask<Object, String, String> {
 
     @Override
     protected String doInBackground(Object... params){
-        //grab the map we are altering
         mMap = (GoogleMap) params[0];
-        //url = (String)params[1];
         //TODO create url based on current location
-        //url to parse for information
         url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.0016332,-83.019707&radius=5000&type=supermarket&keyword=store&key=AIzaSyAQrWxqWmVFQ1n5kt6rrrb9Ujq5I5yC4OI";
 
         try{
@@ -45,7 +42,6 @@ public class GetNearbyPlace extends AsyncTask<Object, String, String> {
             httpURLConnection.connect();
             is = httpURLConnection.getInputStream();
             bufferedReader = new BufferedReader(new InputStreamReader(is));
-
             String line="";
             stringBuilder = new StringBuilder();
             while((line = bufferedReader.readLine())!=null){
@@ -77,16 +73,16 @@ public class GetNearbyPlace extends AsyncTask<Object, String, String> {
                 //grab the json objects for its location and name
                 JSONObject jsonObject = resultArray.getJSONObject(i);
                 JSONObject locationObj = jsonObject.getJSONObject("geometry").getJSONObject("location");
-
+                //grab location
                 String latitude = locationObj.getString("lat");
                 String longitude = locationObj.getString("lng");
-
+                //grab resulting array of stores
                 JSONObject nameObject = resultArray.getJSONObject(i);
-
+                //grab the stores name to be displayed with marker
                 String name_store = nameObject.getString("name");
 
                 LatLng latLng = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
-
+                //handle marker creations
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(name_store);
                 markerOptions.position(latLng);
@@ -95,9 +91,6 @@ public class GetNearbyPlace extends AsyncTask<Object, String, String> {
 
 
             }
-
-
-
         }catch(JSONException e){
             e.printStackTrace();
         }

@@ -36,8 +36,6 @@ class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         super(itemView);
         mName = itemView.findViewById(R.id.txtName);
         mTags = itemView.findViewById(R.id.txtLength);
-        //mRecipeButton = itemView.findViewById(R.id.recipeButton);
-
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
     }
@@ -54,18 +52,17 @@ class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     public boolean onLongClick(View v){
         itemClickListener.onClick(v, getAdapterPosition(), true);
         return true;
-//        return false;
     }
 }
 
 public class MyAdapterToday extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_TYPE_ITEM = 0, VIEW_TYPE_LOADING = 1;
-    ILoadMoreToday loadMore;
-    boolean isLoading;
-    Activity activity;
-    List<ItemToday> items;
-    int visibleThreshold = 5;
-    int lastVisibleItem, totalItemCount;
+    private ILoadMoreToday loadMore;
+    private boolean isLoading;
+    private Activity activity;
+    private List<ItemToday> items;
+    private int visibleThreshold = 5;
+    private int lastVisibleItem, totalItemCount;
 
     public MyAdapterToday(RecyclerView recyclerView, Activity activity, List<ItemToday> items){
         this.activity = activity;
@@ -134,39 +131,18 @@ public class MyAdapterToday extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View view, int adapterPos, boolean isLongClick) {
                     adapterPos = holder.getAdapterPosition();
-//                    ItemToday clickedItem = items.get(position);
-//                    Toast.makeText(activity, clickedItem.getName(), Toast.LENGTH_SHORT).show();
-//                    if(isLongClick){
-//                        Toast.makeText(activity, "Long Click: " + items.get(position), Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(activity, "Short Click: " + items.get(position), Toast.LENGTH_SHORT).show();
-//                    }
                     Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
                     intent.putExtra("Recipe", adapterPos);
-                    //intent.pu
                     view.getContext().startActivity(intent);
 
                 }
             });
-
-//            viewHolder.mRecipeButton.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View view){
-//
-//                    Intent intent = new Intent(view.getContext(), ViewRecipeActivity.class);
-//                    //intent.putExtra("Recipe", position);
-//                    view.getContext().startActivity(intent);
-//                }
-//            });
 
         } else if (holder instanceof LoadingViewHolder){
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
     }
-
-
-
 
     @Override
     public int getItemCount() {

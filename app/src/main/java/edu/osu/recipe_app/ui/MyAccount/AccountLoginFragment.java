@@ -53,7 +53,7 @@ public class AccountLoginFragment extends Fragment {
         mPassword = v.findViewById(R.id.passwordLoginEntry);
         mLoginButton = (Button) v.findViewById(R.id.loginButton);
         mCreateAccountButton = (Button) v.findViewById(R.id.createAccountButton);
-        mListUsersButton = (Button) v.findViewById(R.id.listUsersButton);
+        //mListUsersButton = (Button) v.findViewById(R.id.listUsersButton);
         mEditAccountButton = v.findViewById(R.id.EditAccount);
 
         mEmail.addTextChangedListener(new TextWatcher() {
@@ -136,17 +136,17 @@ public class AccountLoginFragment extends Fragment {
             }
         });
 
-        mListUsersButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-                List<User> listUsers = mUserRepository.listUsers();
-
-                for(int i = 0; i < listUsers.size(); i++){
-                    Log.d(TAG, "User " + i + "- Name: " + listUsers.get(i).getName() + " Email: " + listUsers.get(i).getEmail() + " Password: " + listUsers.get(i).getPassword());
-                }
-            }
-        });
+//        mListUsersButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//
+//                List<User> listUsers = mUserRepository.listUsers();
+//
+//                for(int i = 0; i < listUsers.size(); i++){
+//                    Log.d(TAG, "User " + i + "- Name: " + listUsers.get(i).getName() + " Email: " + listUsers.get(i).getEmail() + " Password: " + listUsers.get(i).getPassword());
+//                }
+//            }
+//        });
 
         return v;
     }

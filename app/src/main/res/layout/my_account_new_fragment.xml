@@ -116,6 +116,7 @@
         app:layout_constraintVertical_bias="0.813" />
 
     <!--New Account Button -->
+    <!--
     <Button
         android:id="@+id/deleteUserButton"
         android:layout_width="217dp"
@@ -131,5 +132,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
+        -->
 
 </android.support.constraint.ConstraintLayout>

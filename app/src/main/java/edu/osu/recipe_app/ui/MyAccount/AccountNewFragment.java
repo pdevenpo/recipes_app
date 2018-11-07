@@ -46,7 +46,7 @@ public class AccountNewFragment extends Fragment {
         mPassword = v.findViewById(R.id.passwordEntry);
         mName = v.findViewById(R.id.nameEntry);
         mNewAccountButton = (Button) v.findViewById(R.id.newAccountButton);
-        mDeleteUserButton = (Button) v.findViewById(R.id.deleteUserButton);
+        //mDeleteUserButton = (Button) v.findViewById(R.id.deleteUserButton);
 
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,23 +115,23 @@ public class AccountNewFragment extends Fragment {
             }
         });
 
-        mDeleteUserButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if(mUser.getEmail() != null){
-                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){
-                        mUserRepository.deleteUser(mUser.getEmail());
-                        Toast.makeText(getContext(), "User deleted", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getContext(), "No user found with that email", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Please enter an email first", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        mDeleteUserButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                if(mUser.getEmail() != null){
+//                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){
+//                        mUserRepository.deleteUser(mUser.getEmail());
+//                        Toast.makeText(getContext(), "User deleted", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getActivity(), MainActivity.class);
+//                        startActivity(intent);
+//                    } else {
+//                        Toast.makeText(getContext(), "No user found with that email", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    Toast.makeText(getContext(), "Please enter an email first", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
         return v;
     }

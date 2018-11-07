@@ -37,18 +37,7 @@ public class TodaysPickActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.todays_pick_activity);
-//
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment fragment = fm.findFragmentById(R.id.TodaysPickContainer);
-//
-//        if(fragment == null){
-//            fragment = new TodaysPickFragment();
-//            fm.beginTransaction()
-//                    .add(R.id.TodaysPickContainer, fragment)
-//                    .commit();
-//
-//        }
+
         mRecipeRepository = new RecipeRepository(this);
         mRecipesList = mRecipeRepository.listRecipes();
 
@@ -97,15 +86,6 @@ public class TodaysPickActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-
-//        savedInstanceState.putBoolean("MyBoolean", true);
-//        savedInstanceState.putDouble("myDouble", 1.9);
-//        savedInstanceState.putInt("MyInt", 1);
-          //savedInstanceState.putParcelableArrayList("items",items);
-
-
-
-
     }
 
     private void getRecipesToDisplay(int index, int end){
@@ -116,6 +96,7 @@ public class TodaysPickActivity extends AppCompatActivity {
         String daysSubString = strDate.substring(strDate.length()-2,strDate.length());
         int result = Integer.parseInt(daysSubString);
 
+        //TODO Implement algorithm to decide recipe based on date.
         if(result > 0 && result <= 10){
             num = 0;
         }else if(result>10 && result<=20){
@@ -124,8 +105,6 @@ public class TodaysPickActivity extends AppCompatActivity {
             num = 0;
         }
 
-
-        //String name = UUID.randomUUID().toString();
         Recipe recipe = mRecipesList.get(num);
 
         String name = recipe.getRecipeName();
