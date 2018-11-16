@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.osu.recipe_app.R;
-import edu.osu.recipe_app.ui.Favorites.FavoritesActivity;
 import edu.osu.recipe_app.ui.FindStore.FindStoreActivity;
 import edu.osu.recipe_app.ui.MyAccount.AccountLoginActivity;
 import edu.osu.recipe_app.ui.MyRecipes.JSONParser.RecipeObj;
@@ -50,7 +49,6 @@ public class FragmentPortrait extends Fragment {
     private Button mTimer;
     private Button mTodaysPick;
     private Button mMyAccount;
-    private Button mFavorites;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -85,7 +83,6 @@ public class FragmentPortrait extends Fragment {
         mTimer = v.findViewById(R.id.TimerButton);
         mTodaysPick = v.findViewById(R.id.TodaysPickButton);
         mMyAccount = v.findViewById(R.id.MyAccountButton);
-        mFavorites = v.findViewById(R.id.FavoritesButton);
 
 
         mRecipeRepository = new RecipeRepository(this.getContext());
@@ -134,20 +131,7 @@ public class FragmentPortrait extends Fragment {
                 startActivity(intent);
             }
         });
-        mFavorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FavoritesActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-
         return v;
-
     }
 
     public String ReadRecipesFile(){
