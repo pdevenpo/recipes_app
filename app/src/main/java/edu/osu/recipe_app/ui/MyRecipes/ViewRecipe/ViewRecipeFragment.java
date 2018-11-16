@@ -32,9 +32,9 @@ public class ViewRecipeFragment extends Fragment {
     private TextView mRecipeSource;
     //private TextView mRecipeTimerStartTxt;
     private TextView mTimerTime;
-    private Button mPrepTime;
-    private Button mWaitTime;
-    private Button mCookTime;
+//    private Button mPrepTime;
+//    private Button mWaitTime;
+//    private Button mCookTime;
     private TextView mCalories;
     private TextView mFat;
     private TextView mSatFat;
@@ -73,9 +73,9 @@ public class ViewRecipeFragment extends Fragment {
         mRecipeSource = v.findViewById(R.id.recipeSource);
         mTimerTime = v.findViewById(R.id.timerTime);
         //buttons
-        mPrepTime = v.findViewById(R.id.prepTime);
-        mWaitTime = v.findViewById(R.id.waitTime);
-        mCookTime = v.findViewById(R.id.cookTime);
+//        mPrepTime = v.findViewById(R.id.prepTime);
+//        mWaitTime = v.findViewById(R.id.waitTime);
+//        mCookTime = v.findViewById(R.id.cookTime);
         //
         mCalories = v.findViewById(R.id.calories);
         mFat = v.findViewById(R.id.fat);
