@@ -66,28 +66,31 @@ public class FindStoreActivity extends AppCompatActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
         LocationManager lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        latLng2 = new LatLng(location.getLatitude(),location.getLongitude());
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng2));
-                        CameraPosition cp = new CameraPosition(latLng2,10.0f,0f,0f);
-                        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
-                        if (location != null) {
-                            // Logic to handle location object
-                        }
-                    }
-                });
+
 
         if(!mPermissionDenied && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            latLng2 = new LatLng(location.getLatitude(),location.getLongitude());
+                            //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng2));
+                            CameraPosition cp = new CameraPosition(latLng2,10.0f,0f,0f);
+                            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+                            if (location != null) {
+                                // Logic to handle location object
+                            }
+                        }
+                    });
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
