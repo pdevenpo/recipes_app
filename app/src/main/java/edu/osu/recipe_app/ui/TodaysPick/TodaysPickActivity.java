@@ -49,6 +49,8 @@ public class TodaysPickActivity extends AppCompatActivity {
         adapter = new MyAdapterToday(recycler, this, items);
         recycler.setAdapter(adapter);
 
+
+
         //mRecipeButton = findViewById(R.id.recipeButton);
 
         //set load more event
@@ -111,7 +113,7 @@ public class TodaysPickActivity extends AppCompatActivity {
         List<String> tags = recipe.getRecipeTags();
         String tagsAsString = getTagsAsString(tags, ", ");
 
-        ItemToday item = new ItemToday(counter + ". " + name, "tags: " + tagsAsString);
+        ItemToday item = new ItemToday("Today: " + name, "tags: " + tagsAsString);
         items.add(item);
 
     }

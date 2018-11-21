@@ -49,7 +49,6 @@ public class RecipeRepository {
         r.setRecipeCategory(recipeCategory);
 
         insertRecipeHelper(r);
-
     }
 
     public void insertRecipeHelper(final Recipe recipe){
