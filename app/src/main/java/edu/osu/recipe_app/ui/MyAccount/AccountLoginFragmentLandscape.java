@@ -1,11 +1,10 @@
 package edu.osu.recipe_app.ui.MyAccount;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
 import edu.osu.recipe_app.MainActivity;
 import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.MyAccount.UserData.User;
 import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
 
-public class AccountLoginFragment extends Fragment {
-
+public class AccountLoginFragmentLandscape extends Fragment {
     private final String TAG = "LoginActivityTag";
     private EditText mEmail;
     private EditText mPassword;
@@ -34,7 +30,7 @@ public class AccountLoginFragment extends Fragment {
     private UserRepository mUserRepository;
 
 
-    public AccountLoginFragment() {
+    public AccountLoginFragmentLandscape() {
     }
 
     @Override
@@ -47,7 +43,7 @@ public class AccountLoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.my_account_login_fragment, parent, false);
+        View v = inflater.inflate(R.layout.my_account_login_fragment_landscape, parent, false);
 
         mEmail = v.findViewById(R.id.emailLoginEntry);
         mPassword = v.findViewById(R.id.passwordLoginEntry);
@@ -90,7 +86,7 @@ public class AccountLoginFragment extends Fragment {
         mCreateAccountButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-            startActivity(new Intent(getActivity(), AccountNewActivity.class));
+                startActivity(new Intent(getActivity(), AccountNewActivity.class));
             }
         });
 
@@ -101,9 +97,9 @@ public class AccountLoginFragment extends Fragment {
                 if(!mEmail.getText().toString().equals("")){
                     startActivity(new Intent(getActivity(), AccountEditActivity.class));
 //                    if(mUserRepository.findUserByEmail(mUser.getEmail()) != null){ //this doesn't seem to be working
-                        Intent intent = new Intent(getActivity(), AccountEditActivity.class);
-                        intent.putExtra("CurrentUserEmail",mEmail.getText().toString());
-                        startActivity(intent);
+                    Intent intent = new Intent(getActivity(), AccountEditActivity.class);
+                    intent.putExtra("CurrentUserEmail",mEmail.getText().toString());
+                    startActivity(intent);
 //                    } else {
 //                        Toast.makeText(getContext(), "Must enter an email associated with an account", Toast.LENGTH_SHORT).show();
 //

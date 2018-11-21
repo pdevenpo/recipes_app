@@ -1,36 +1,36 @@
 package edu.osu.recipe_app.ui.MyAccount;
 
+import android.app.FragmentTransaction;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import edu.osu.recipe_app.R;
+import edu.osu.recipe_app.ui.Orientation.FragmentLandscape;
+import edu.osu.recipe_app.ui.Orientation.FragmentPortrait;
 
 public class AccountEditActivity extends AppCompatActivity {
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_account_edit_activity);
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.AccountEditContainer);
 
-        String mCurrentUserEmail = "Account";
+        android.app.FragmentManager fragmentManager = this.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Configuration configInfo = this.getResources().getConfiguration();
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            mCurrentUserEmail = extras.getString("CurrentUserEmail");
+        Bundle args = new Bundle();
+        if (configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            AccountEditFragmentLandscape fragmentLandscape = new AccountEditFragmentLandscape();
+            fragmentLandscape.setArguments(args);
+            fragmentTransaction.replace(android.R.id.content, (android.app.Fragment) fragmentLandscape);
+        } else {
+            AccountEditFragment fragmentPortrait = new AccountEditFragment();
+            fragmentPortrait.setArguments(args);
+            fragmentTransaction.replace(android.R.id.content, (android.app.Fragment) fragmentPortrait);
         }
-
-
-        if(fragment == null){
-            fragment = new AccountEditFragment();
-            Bundle args = new Bundle();
-            args.putString("CurrentUserEmail", mCurrentUserEmail);
-            fragment.setArguments(args);
-            fm.beginTransaction()
-                    .add(R.id.AccountEditContainer, fragment)
-                    .commit();
-        }
+        fragmentTransaction.commit();
     }
 }

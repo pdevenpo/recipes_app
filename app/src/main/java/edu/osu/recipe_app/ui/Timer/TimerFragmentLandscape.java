@@ -1,13 +1,13 @@
 package edu.osu.recipe_app.ui.Timer;
 
 import android.app.AlarmManager;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +21,7 @@ import android.widget.Toast;
 import edu.osu.recipe_app.AlertReceiver;
 import edu.osu.recipe_app.R;
 
-public class TimerFragment extends Fragment {
-    // Potentially use this when passing an extra from another Activity?
+public class TimerFragmentLandscape extends Fragment {
     private String mTimerLength;
 
     private TextView mCountdownText;
@@ -49,7 +48,7 @@ public class TimerFragment extends Fragment {
     private boolean timerRunning;                 // True if the timer is active, false if cancelled
     private boolean timerPaused;                  // True if timer is paused, false if timer is running
 
-    public TimerFragment() {
+    public TimerFragmentLandscape() {
     }
 
     @Override
@@ -134,7 +133,7 @@ public class TimerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.timer_fragment, parent, false);
+        View v = inflater.inflate(R.layout.timer_fragment_landscape, parent, false);
 
         numberPickerLayout = (LinearLayout) v.findViewById(R.id.NumberPickerLayout);
 
@@ -236,7 +235,7 @@ public class TimerFragment extends Fragment {
         if(timerRunning){
             mPauseTimerButton.setText("Resume");
             PauseTimer();
-        // Else if timer is not running, resume timer
+            // Else if timer is not running, resume timer
         } else {
             mPauseTimerButton.setText("Pause");
             StartTimer();

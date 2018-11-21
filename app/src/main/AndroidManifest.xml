@@ -38,7 +38,6 @@
         </activity>
         <activity android:name=".ui.TodaysPick.TodaysPickActivity" />
         <activity android:name=".ui.MyRecipes.MyRecipesActivity" />
-        <activity android:name=".ui.Favorites.FavoritesActivity" />
         <activity android:name=".ui.Timer.TimerActivity" />
         <activity
             android:name=".ui.FindStore.FindStoreActivity"
