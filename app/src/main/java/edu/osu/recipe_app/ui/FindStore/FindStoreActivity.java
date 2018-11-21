@@ -93,7 +93,7 @@ public class FindStoreActivity extends AppCompatActivity implements
                 public void run() {
                     findStore(null);
                 }
-            }, 5000);   //5 seconds
+            }, 4000);   //5 seconds
         }else{
             Toast.makeText(this, "Please Enable Location Services!\n" + "If it is enabled, please check app permissions." , LENGTH_LONG).show();
 
@@ -142,11 +142,27 @@ public class FindStoreActivity extends AppCompatActivity implements
     }
 
     public void findStore(View v){
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        latLng2 = new LatLng(location.getLatitude(),location.getLongitude());
 
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
         //Stringbuilder builds the custom URL based on location and search query information
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         //append user current location from above
-        stringBuilder.append("location="+latLng.latitude + "," + latLng.longitude);
+        stringBuilder.append("location="+latLng2.latitude + "," + latLng2.longitude);
         //area to search around user
         stringBuilder.append("&radius="+"5000");
         //google place search key words

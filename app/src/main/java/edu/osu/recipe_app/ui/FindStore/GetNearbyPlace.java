@@ -32,8 +32,8 @@ public class GetNearbyPlace extends AsyncTask<Object, String, String> {
     @Override
     protected String doInBackground(Object... params){
         mMap = (GoogleMap) params[0];
-        //TODO create url based on current location
-        url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.0016332,-83.019707&radius=5000&type=supermarket&keyword=store&key=AIzaSyAQrWxqWmVFQ1n5kt6rrrb9Ujq5I5yC4OI";
+        url = (String) params[1];
+        //url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.0016332,-83.019707&radius=5000&type=supermarket&keyword=store&key=AIzaSyAQrWxqWmVFQ1n5kt6rrrb9Ujq5I5yC4OI";
 
         try{
             //Establish a connection with URL to be scraped
