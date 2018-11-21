@@ -5,6 +5,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,47 +17,74 @@ import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class UserInstrumentedTest {
-    private final String EMAIL = "testName@gmail.com";
-    private final String NAME = "John Doe";
-    private final String PASSWORD = "password12345";
+    private final static String EMAIL_1 = "testName@gmail.com";
+    private final static String NAME_1 = "John Doe";
+    private final static String PASSWORD_1 = "password12345";
 
-    private final String UPDATED_NAME = "John Smith";
-    private final String UPDATED_PASSWORD = "NewPassword1234";
-    private final String UPDATED_EMAIL = "JohnSmith@yahoo.com";
+    private final static String EMAIL_2 = "tim@gmail.com";
+    private final static String NAME_2 = "Tim Lake";
+    private final static String PASSWORD_2 = "mypassword";
 
-    private UserRepository mUserRepository;
+    private final static String EMAIL_3 = "email@gmail.com";
+    private final static String NAME_3 = "Old Name";
+    private final static String PASSWORD_3 = "oldPassword";
+
+    private final static String UPDATED_NAME = "John Smith";
+    private final static String UPDATED_PASSWORD = "NewPassword1234";
+
+    private static UserRepository mUserRepository;
 
     @Before
     public void setUpUserRepository(){
         Context appContext = InstrumentationRegistry.getTargetContext();
         mUserRepository = new UserRepository(appContext);
+
+        mUserRepository.insertUser(EMAIL_2, PASSWORD_2, NAME_2);
+        mUserRepository.insertUser(EMAIL_3, PASSWORD_3, NAME_3);
     }
 
-    // Testing creation of new User (object) with attributes & retrieving those attributes
+    // Testing creation of new User (object) with attributes & retrieving those attributes: success
     @Test
-    public void createUserTest(){
+    public void getUserAttributes(){
         User mUser = new User();
 
         mUser.setEmail("testName@gmail.com");
         mUser.setName("John Doe");
         mUser.setPassword("password12345");
 
-        //assert stupidfuckingthing;
+        Assert.assertEquals(EMAIL_1, mUser.getEmail());
+        Assert.assertEquals(NAME_1, mUser.getName());
+        Assert.assertEquals(PASSWORD_1, mUser.getPassword());
     }
 
     // Testing creation of new User (in database) with attributes & retrieving those attributes
     @Test
-    public void addUserToDatabaseTestSuccess(){
+    public void retrieveUserFromDatabaseTest(){
+        User user = mUserRepository.findUserByEmail(EMAIL_2);
 
+        Assert.assertEquals(user.getEmail(), EMAIL_2);
+        Assert.assertEquals(user.getName(), NAME_2);
+        Assert.assertEquals(user.getPassword(), PASSWORD_2);
+    }
 
-        mUserRepository.insertUser(EMAIL, PASSWORD, NAME);
+    // Testing updates of User
+    @Test
+    public void updateUserTest(){
+        User userToUpdate = new User();
 
-        User mUser = mUserRepository.getUser(NAME);
+        // Update User's name & password (Email is primary key, cannot be changed)
+        userToUpdate.setEmail(EMAIL_3);
+        userToUpdate.setName(UPDATED_NAME);
+        userToUpdate.setPassword(UPDATED_PASSWORD);
 
-        /*
-        assert (EMAIL.equals(mUser.getEmail()));
-        assert (NAME.equals(mUser.getName()));
-        assert (PASSWORD.equals(mUser.getPassword()));
-        */
+        // Update user in database
+        mUserRepository.updateUser(userToUpdate);
+
+        User updatedUser = mUserRepository.findUserByEmail(EMAIL_3);
+
+        // Assert user is updated
+        Assert.assertEquals(EMAIL_3, updatedUser.getEmail());
+        Assert.assertEquals(UPDATED_NAME, updatedUser.getName());
+        Assert.assertEquals(UPDATED_PASSWORD, updatedUser.getPassword());
     }
 }
