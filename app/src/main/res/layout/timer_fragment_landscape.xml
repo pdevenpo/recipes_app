@@ -25,7 +25,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintHorizontal_bias="0.323"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.492">
@@ -143,7 +143,7 @@
     <ProgressBar
         android:id="@+id/TimerProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="203dp"
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -155,28 +155,30 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintVertical_bias="0.473" />
 
     <!-- Countdown text showing time left, in the form HH:MM:SS -->
     <TextView
         android:id="@+id/CountdownText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/TimerProgressBar"
         android:layout_alignLeft="@id/TimerProgressBar"
-        android:layout_alignRight="@id/TimerProgressBar"
         android:layout_alignTop="@id/TimerProgressBar"
+        android:layout_alignRight="@id/TimerProgressBar"
+        android:layout_alignBottom="@id/TimerProgressBar"
         android:gravity="center"
         android:text="00:00:00"
         android:textSize="30sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.37"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
     <!-- Button to start Timer -->
     <Button
@@ -193,61 +195,12 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.16" />
 
-    <!-- Divider for neatness -->
-    <View
-        android:id="@+id/HorizontalDivider"
-        android:layout_width="match_parent"
-        android:layout_height="14dp"
-        android:layout_marginBottom="28dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/TimerButtonBar"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Bottom set of buttons, including Pause/Resume & Cancel buttons -->
-    <LinearLayout
-        android:id="@+id/TimerButtonBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent">
-    </LinearLayout>
-
-        <!-- Button to Pause/Resume Timer -->
-    <Button
-        android:id="@+id/PauseTimerButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#00000000"
-        android:padding="5dp"
-        android:text="Pause"
-        app:layout_constraintBottom_toTopOf="@+id/CancelTimerButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/NumberPickerLayout"
-        app:layout_constraintTop_toBottomOf="@+id/StartTimerButton" />
-
-        <!-- Divider for neatness -->
-        <View
-            android:id="@+id/VerticalDivider"
-            android:layout_width="2dp"
-            android:layout_height="50dp"
-            android:background="?android:attr/listDivider" />
-
-        <!-- Button to Cancel Timer -->
+    <!-- Button to Cancel Timer -->
     <Button
         android:id="@+id/CancelTimerButton"
         android:layout_width="150dp"
@@ -263,8 +216,64 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.818" />
+
+    <!-- Button to Pause/Resume Timer -->
+    <Button
+        android:id="@+id/PauseTimerButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00000000"
+        android:padding="5dp"
+        android:text="Pause"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <!-- Divider for neatness -->
+    <View
+        android:id="@+id/HorizontalDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginEnd="584dp"
+        android:layout_marginBottom="12dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/TimerButtonBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom set of buttons, including Pause/Resume & Cancel buttons -->
+    <LinearLayout
+        android:id="@+id/TimerButtonBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="96dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+
+        <!-- Divider for neatness -->
+        <View
+            android:id="@+id/VerticalDivider"
+            android:layout_width="2dp"
+            android:layout_height="50dp"
+            android:background="?android:attr/listDivider" />
+
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
