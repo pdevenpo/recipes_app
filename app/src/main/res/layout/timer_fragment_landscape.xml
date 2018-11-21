@@ -1,6 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Timer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Timer.TimerFragment">
 
+    <!-- Timer Title Text -->
+    <TextView
+        android:id="@+id/TimerTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <!-- Linear Layout for storage of all things Number Picker related -->
+    <LinearLayout
+        android:id="@+id/NumberPickerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.492">
+
+        <!-- Linear Layout for storage of all things Hour Number Picker related -->
+        <LinearLayout
+            android:id="@+id/HoursPickerLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/TimerProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Number Picker to choose amount of Hours -->
+            <NumberPicker
+                android:id="@+id/HourNumberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+            </NumberPicker>
+
+            <!-- Text labeling Hours Number Picker -->
+            <TextView
+                android:id="@+id/HoursNumberPickerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hours"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Linear Layout for storage of all things Minute Number Picker related -->
+        <LinearLayout
+            android:id="@+id/MinutesPickerLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/TimerProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Number Picker to choose amount of Minutes -->
+            <NumberPicker
+                android:id="@+id/MinuteNumberPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+            </NumberPicker>
+
+            <!-- Text labeling Minutes Number Picker -->
+            <TextView
+                android:id="@+id/MinutesNumberPickerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Minutes"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Linear Layout for storage of all things Second Number Picker related -->
+        <LinearLayout
+            android:id="@+id/SecondsPickerLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="157dp">
+
+            <!-- Number Picker to choose amount of Seconds -->
+            <NumberPicker
+                android:id="@+id/SecondNumberPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+            </NumberPicker>
+
+            <!-- Text labeling Seconds Number Picker -->
+            <TextView
+                android:id="@+id/SecondsNumberPickerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Seconds"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Circular Progress Bar to visually show time left  -->
+    <ProgressBar
+        android:id="@+id/TimerProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="203dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
+
+    <!-- Countdown text showing time left, in the form HH:MM:SS -->
+    <TextView
+        android:id="@+id/CountdownText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/TimerProgressBar"
+        android:layout_alignLeft="@id/TimerProgressBar"
+        android:layout_alignRight="@id/TimerProgressBar"
+        android:layout_alignTop="@id/TimerProgressBar"
+        android:gravity="center"
+        android:text="00:00:00"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Button to start Timer -->
+    <Button
+        android:id="@+id/StartTimerButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:padding="5dp"
+        android:text="Start"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
+
+    <!-- Divider for neatness -->
+    <View
+        android:id="@+id/HorizontalDivider"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_marginBottom="28dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/TimerButtonBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom set of buttons, including Pause/Resume & Cancel buttons -->
+    <LinearLayout
+        android:id="@+id/TimerButtonBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent">
+    </LinearLayout>
+
+        <!-- Button to Pause/Resume Timer -->
+    <Button
+        android:id="@+id/PauseTimerButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00000000"
+        android:padding="5dp"
+        android:text="Pause"
+        app:layout_constraintBottom_toTopOf="@+id/CancelTimerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NumberPickerLayout"
+        app:layout_constraintTop_toBottomOf="@+id/StartTimerButton" />
+
+        <!-- Divider for neatness -->
+        <View
+            android:id="@+id/VerticalDivider"
+            android:layout_width="2dp"
+            android:layout_height="50dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- Button to Cancel Timer -->
+    <Button
+        android:id="@+id/CancelTimerButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00000000"
+        android:padding="5dp"
+        android:text="Cancel"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783" />
 </android.support.constraint.ConstraintLayout>
