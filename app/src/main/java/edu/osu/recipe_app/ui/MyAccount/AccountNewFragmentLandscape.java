@@ -17,8 +17,7 @@ import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.MyAccount.UserData.User;
 import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
 
-public class AccountNewFragment extends Fragment {
-
+public class AccountNewFragmentLandscape extends Fragment {
     private EditText mEmail;
     private EditText mPassword;
     private EditText mName;
@@ -27,7 +26,7 @@ public class AccountNewFragment extends Fragment {
     private Button mDeleteUserButton;
     private UserRepository mUserRepository;
 
-    public AccountNewFragment() {
+    public AccountNewFragmentLandscape() {
     }
 
     @Override
@@ -40,7 +39,7 @@ public class AccountNewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.my_account_new_fragment, parent, false);
+        View v = inflater.inflate(R.layout.my_account_new_fragment_landscape, parent, false);
 
         mEmail = v.findViewById(R.id.emailEntry);
         mPassword = v.findViewById(R.id.passwordEntry);

@@ -1,9 +1,8 @@
 package edu.osu.recipe_app.ui.MyAccount;
 
-
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,9 +18,7 @@ import edu.osu.recipe_app.R;
 import edu.osu.recipe_app.ui.MyAccount.UserData.User;
 import edu.osu.recipe_app.ui.MyAccount.UserData.UserRepository;
 
-
-public class AccountEditFragment extends Fragment {
-
+public class AccountEditFragmentLandscape extends Fragment {
     private final String TAG = "LoginEditTag";
     private TextView mUserEmail;
     private EditText mName;
@@ -38,7 +35,7 @@ public class AccountEditFragment extends Fragment {
     private UserRepository mUserRepository;
 
 
-    public AccountEditFragment() {
+    public AccountEditFragmentLandscape() {
 
     }
 
@@ -52,7 +49,7 @@ public class AccountEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         super.onCreateView(inflater, parent, savedInstanceState);
-        View v = inflater.inflate(R.layout.my_account_edit_fragment, parent, false);
+        View v = inflater.inflate(R.layout.my_account_edit_fragment_landscape, parent, false);
         mName = v.findViewById(R.id.nameUpdate);
         mPassword = v.findViewById(R.id.passwordUpdate);
         mUserEmail = v.findViewById(R.id.emailEdit);
