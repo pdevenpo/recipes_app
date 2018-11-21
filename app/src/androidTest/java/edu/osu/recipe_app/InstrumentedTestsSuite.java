@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 
 // Runs all unit tests.
 @RunWith(Suite.class)
-@Suite.SuiteClasses({UserInstrumentedTest.class})
+@Suite.SuiteClasses({UserInstrumentedTest.class, RecipesInstrumentedTest.class})
 
 public class InstrumentedTestsSuite {
 }

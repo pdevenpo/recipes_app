@@ -32,18 +32,23 @@ public class UserInstrumentedTest {
     private final static String UPDATED_NAME = "John Smith";
     private final static String UPDATED_PASSWORD = "NewPassword1234";
 
-    private static UserRepository mUserRepository;
+    private UserRepository mUserRepository;
 
     @Before
     public void setUpUserRepository(){
         Context appContext = InstrumentationRegistry.getTargetContext();
         mUserRepository = new UserRepository(appContext);
 
-        mUserRepository.insertUser(EMAIL_2, PASSWORD_2, NAME_2);
-        mUserRepository.insertUser(EMAIL_3, PASSWORD_3, NAME_3);
+        if(mUserRepository.findUserByEmail(EMAIL_2) == null){
+            mUserRepository.insertUser(EMAIL_2, PASSWORD_2, NAME_2);
+        }
+
+        if(mUserRepository.findUserByEmail(EMAIL_3) == null){
+            mUserRepository.insertUser(EMAIL_3, PASSWORD_3, NAME_3);
+        }
     }
 
-    // Testing creation of new User (object) with attributes & retrieving those attributes: success
+    // Testing creation of new User (object) with attributes & retrieving those attributes
     @Test
     public void getUserAttributes(){
         User mUser = new User();
@@ -59,11 +64,23 @@ public class UserInstrumentedTest {
 
     // Testing creation of new User (in database) with attributes & retrieving those attributes
     @Test
-    public void retrieveUserFromDatabaseTest(){
+    public void retrieveUserNameFromDatabaseTest(){
+        User user = mUserRepository.findUserByEmail(EMAIL_2);
+
+        Assert.assertEquals(user.getName(), NAME_2);
+    }
+
+    @Test
+    public void retrieveUserEmailFromDatabaseTest(){
         User user = mUserRepository.findUserByEmail(EMAIL_2);
 
         Assert.assertEquals(user.getEmail(), EMAIL_2);
-        Assert.assertEquals(user.getName(), NAME_2);
+    }
+
+    @Test
+    public void retrieveUserPasswordFromDatabaseTest(){
+        User user = mUserRepository.findUserByEmail(EMAIL_2);
+
         Assert.assertEquals(user.getPassword(), PASSWORD_2);
     }
 
